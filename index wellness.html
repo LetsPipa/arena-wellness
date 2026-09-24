@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0f3b4a">
+<title>Arena Wellness by Bodytech · Let's Pipa</title>
+<meta name="description" content="Reserve sua aula na Arena Wellness by Bodytech no Let's Pipa.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f1e7;--card:#fff;--ink:#0f3b4a;--ink2:#335763;--mut:#6f7f86;--line:#e7dfd0;--soft:#fbf8f2;--acc:#e9724c;--acc2:#d85f39;--sun:#f2b544;--ok:#2a9d8f;--okbg:#e2f3f0;--warn:#b7791f;--warnbg:#fdf2dc;--crit:#c94040;--critbg:#fbe5e5}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0}
+body{font-family:Inter,system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--ink);font-size:15px;line-height:1.45;min-height:100vh}
+button{font:inherit;cursor:pointer}
+.wrap{max-width:720px;margin:0 auto;padding:0 16px}
+/* HERO */
+.hero{background:var(--ink);color:#fff;position:relative;overflow:hidden;padding:22px 0 64px}
+.hero:before{content:'';position:absolute;right:-90px;top:-90px;width:260px;height:260px;border-radius:50%;background:var(--sun);opacity:.9}
+.hero:after{content:'';position:absolute;left:0;right:0;bottom:-1px;height:46px;background:var(--bg);border-radius:50% 50% 0 0/100% 100% 0 0}
+.hero .wrap{position:relative;z-index:1}
+.logos{display:flex;align-items:center;gap:12px;margin-bottom:26px;min-height:36px}
+.logos img{height:34px;width:auto;display:block}
+.logos .x{opacity:.55;font-size:14px}
+.wm{font-weight:700;letter-spacing:1.5px;font-size:13px;text-transform:uppercase;border:1.5px solid rgba(255,255,255,.75);border-radius:6px;padding:5px 9px}
+.hero h1{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:38px;line-height:1.02;margin:0 0 8px;max-width:420px}
+.hero h1 small{display:block;font-family:Inter,sans-serif;font-size:13px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--sun);margin-bottom:10px}
+.hero p{margin:0;opacity:.85;font-size:15px;max-width:440px}
+/* TABS */
+.tabs{display:flex;gap:6px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:5px;margin:-34px 0 18px;position:relative;z-index:2;box-shadow:0 6px 20px rgba(15,59,74,.08)}
+.tabs button{flex:1;border:0;background:none;padding:11px 8px;border-radius:10px;font-weight:600;color:var(--mut)}
+.tabs button.on{background:var(--ink);color:#fff}
+.tabs .cnt{display:inline-block;min-width:20px;height:20px;line-height:20px;border-radius:10px;background:var(--acc);color:#fff;font-size:11px;margin-left:6px;padding:0 6px}
+/* DAYS */
+.days{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 10px;margin:0 -16px 8px;padding-left:16px;padding-right:16px;scrollbar-width:none;scroll-snap-type:x mandatory}
+.days::-webkit-scrollbar{display:none}
+.day{flex:0 0 auto;scroll-snap-align:start;min-width:74px;border:1.5px solid var(--line);background:var(--card);border-radius:14px;padding:9px 10px;text-align:center;color:var(--ink)}
+.day .w{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--mut)}
+.day .d{font-family:Fraunces,Georgia,serif;font-size:26px;font-weight:600;line-height:1.1}
+.day .m{font-size:11px;color:var(--mut);text-transform:uppercase;letter-spacing:.8px}
+.day.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.day.on .w,.day.on .m{color:rgba(255,255,255,.7)}
+.day.past{opacity:.45}
+.day .dot{display:block;width:6px;height:6px;border-radius:3px;background:var(--acc);margin:4px auto 0}
+.dayhead{display:flex;justify-content:space-between;align-items:baseline;margin:6px 0 12px}
+.dayhead h2{font-family:Fraunces,Georgia,serif;font-size:22px;font-weight:600;margin:0}
+.dayhead span{color:var(--mut);font-size:13px}
+/* CLASS CARDS */
+.cls{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:12px;display:grid;grid-template-columns:78px 1fr;gap:14px}
+.cls .tm{border-right:1px dashed var(--line);padding-right:12px}
+.cls .tm b{display:block;font-family:Fraunces,Georgia,serif;font-size:24px;font-weight:600;line-height:1}
+.cls .tm span{font-size:12px;color:var(--mut)}
+.cls h3{margin:0 0 2px;font-size:17px}
+.cls .meta{font-size:13px;color:var(--mut);margin-bottom:10px}
+.cls .desc{font-size:13px;color:var(--ink2);margin:-4px 0 10px}
+.bar{height:6px;background:#efe8da;border-radius:3px;overflow:hidden;margin-bottom:6px}
+.bar i{display:block;height:100%;background:var(--ok);border-radius:3px}
+.bar i.hi{background:var(--sun)}
+.bar i.full{background:var(--acc)}
+.vag{display:flex;justify-content:space-between;font-size:12px;color:var(--mut);margin-bottom:12px}
+.vag b{color:var(--ink)}
+.cls.ended{opacity:.55}
+.btn{border:0;border-radius:12px;padding:13px 16px;font-weight:600;background:var(--acc);color:#fff;width:100%;font-size:15px}
+.btn:hover{background:var(--acc2)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.btn.dark{background:var(--ink)}
+.btn.line{background:#fff;color:var(--ink);border:1.5px solid var(--line)}
+.btn.wait{background:#fff;color:var(--acc2);border:1.5px solid var(--acc)}
+.btn.sm{padding:9px 12px;font-size:13px;width:auto}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:5px 10px;border-radius:99px}
+.pill.ok{background:var(--okbg);color:#1d7a6e}
+.pill.warn{background:var(--warnbg);color:var(--warn)}
+.pill.mut{background:#eee;color:#666}
+.pill.crit{background:var(--critbg);color:var(--crit)}
+.empty{text-align:center;color:var(--mut);padding:30px 10px}
+.notice{background:var(--warnbg);color:#7a4d00;border-radius:12px;padding:12px 14px;font-size:14px;margin-bottom:14px}
+.skel{height:130px;border-radius:16px;background:linear-gradient(90deg,#eee7da 25%,#f5efe4 50%,#eee7da 75%);background-size:200% 100%;animation:sk 1.2s infinite;margin-bottom:12px}
+@keyframes sk{to{background-position:-200% 0}}
+/* SHEET */
+.ov{position:fixed;inset:0;background:rgba(15,59,74,.55);z-index:50;display:none;align-items:flex-end;justify-content:center}
+.ov.show{display:flex}
+.sheet{background:var(--card);width:100%;max-width:560px;border-radius:22px 22px 0 0;padding:22px 20px calc(22px + env(safe-area-inset-bottom));max-height:92vh;overflow:auto;animation:up .22s ease-out}
+@keyframes up{from{transform:translateY(40px);opacity:.4}}
+@media (min-width:640px){.ov{align-items:center}.sheet{border-radius:22px}}
+.sheet h3{font-family:Fraunces,Georgia,serif;font-size:22px;margin:0 0 4px;font-weight:600}
+.sheet .sum{background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:12px 0 16px;font-size:14px}
+.sheet .sum b{font-size:16px}
+.close{float:right;border:0;background:var(--soft);width:34px;height:34px;border-radius:17px;font-size:20px;color:var(--mut);line-height:1}
+.fld{margin-bottom:14px}
+.fld label{display:block;font-size:13px;font-weight:600;margin-bottom:6px}
+.in{width:100%;font:inherit;font-size:16px;padding:13px 14px;border:1.5px solid var(--line);border-radius:12px;background:#fff;color:var(--ink)}
+.in:focus{outline:none;border-color:var(--ink)}
+.in.bad{border-color:var(--crit)}
+.hint{font-size:12px;margin-top:5px;color:var(--mut)}
+.hint.ok{color:#1d7a6e}
+.hint.bad{color:var(--crit)}
+.chk{display:flex;gap:10px;align-items:flex-start;font-size:14px;background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:12px;margin-bottom:16px;cursor:pointer}
+.chk input{width:20px;height:20px;margin:1px 0 0;accent-color:var(--ink);flex:0 0 auto}
+.lnk{background:none;border:0;color:var(--acc2);font-weight:600;padding:0;text-decoration:underline}
+.err{background:var(--critbg);color:var(--crit);border-radius:10px;padding:10px 12px;font-size:14px;margin-bottom:14px;display:none}
+.termo{white-space:pre-wrap;font-size:14px;color:var(--ink2);line-height:1.55}
+.me{display:flex;justify-content:space-between;align-items:center;background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:14px;font-size:14px}
+/* SUCCESS */
+.done{text-align:center;padding:6px 0}
+.done .ic{width:72px;height:72px;border-radius:36px;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-size:36px;color:#fff;background:var(--ok)}
+.done .ic.w{background:var(--sun)}
+.done h3{font-size:26px}
+.ticket{border:1.5px dashed var(--line);border-radius:14px;padding:14px;margin:16px 0;text-align:left}
+.ticket .r{display:flex;justify-content:space-between;padding:4px 0;font-size:14px}
+.ticket .r span{color:var(--mut)}
+.code{font-family:ui-monospace,Menlo,monospace;font-size:18px;letter-spacing:3px;font-weight:700}
+.stack{display:grid;gap:10px}
+/* MINHAS */
+.mine{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px;margin-bottom:10px}
+.mine .top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.mine h4{margin:0;font-size:16px}
+.mine .meta{font-size:13px;color:var(--mut);margin-top:2px}
+.mine .act{margin-top:12px;display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:12px;color:var(--mut)}
+footer{text-align:center;color:var(--mut);font-size:13px;padding:30px 16px 40px}
+footer a{color:var(--ink);font-weight:600}
+#toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:12px 16px;border-radius:12px;z-index:90;display:none;max-width:90vw;font-size:14px}
+.spin{display:inline-block;width:16px;height:16px;border:2.5px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:sp .8s linear infinite;vertical-align:-3px;margin-right:6px}
+@keyframes sp{to{transform:rotate(360deg)}}
+.demo{position:fixed;top:10px;right:10px;background:var(--acc);color:#fff;font-size:11px;font-weight:700;padding:4px 8px;border-radius:6px;z-index:60;letter-spacing:.5px}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="logos" id="logos"></div>
+    <h1 id="hTitle"><small>Let's Pipa · Réveillon</small>Arena Wellness</h1>
+    <p id="hSub">Reserve sua aula. Escolha o dia, o horário e garanta seu lugar.</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="tabs">
+    <button id="tAulas" class="on" onclick="setTab('aulas')">Aulas</button>
+    <button id="tMinhas" onclick="setTab('minhas')">Minhas aulas<span class="cnt" id="myCnt" style="display:none"></span></button>
+  </div>
+  <div id="view"></div>
+</main>
+
+<footer id="foot"></footer>
+
+<div class="ov" id="ov" onclick="if(event.target===this)closeSheet()"><div class="sheet" id="sheet"></div></div>
+<div id="toast"></div>
+
+<script>
+/* =====================================================================
+   CONFIGURAÇÃO
+   API_URL: URL /exec do App da Web da Arena (vazio = modo demonstração)
+   LOGO_*: caminho das imagens das logos no repositório (ex.: 'logo-letspipa.png')
+   ===================================================================== */
+var API_URL = '';
+var LOGO_LETSPIPA = '';
+var LOGO_BODYTECH = '';
+
+var DEMO = !API_URL;
+var S = { tab: 'aulas', g: null, day: '', me: null, mine: null, mineErr: '', sel: null, busy: false, timer: null };
+var WD = ['DOM', 'SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SÁB'];
+var WDL = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
+var MES = ['JAN', 'FEV', 'MAR', 'ABR', 'MAI', 'JUN', 'JUL', 'AGO', 'SET', 'OUT', 'NOV', 'DEZ'];
+var MESL = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
+
+/* ============================== UTIL ============================== */
+function $(id) { return document.getElementById(id); }
+function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+function digits(v) { return String(v || '').replace(/\D/g, ''); }
+function pd(d) { var m = String(d).match(/^(\d{4})-(\d{2})-(\d{2})/); return m ? { y: +m[1], m: +m[2], d: +m[3] } : null; }
+function ts(d, h) { var p = pd(d), t = String(h || '00:00').split(':'); return p ? Date.UTC(p.y, p.m - 1, p.d, +t[0] + 3, +t[1] || 0) : 0; }
+function wday(d) { var p = pd(d); return new Date(Date.UTC(p.y, p.m - 1, p.d)).getUTCDay(); }
+function dLong(d) { var p = pd(d); return WDL[wday(d)] + ', ' + p.d + ' de ' + MESL[p.m - 1]; }
+function dShort(d) { var p = pd(d); return (p.d < 10 ? '0' : '') + p.d + '/' + (p.m < 10 ? '0' : '') + p.m; }
+function now() { return Date.now() + (S.skew || 0); }
+function sget(k) { try { return window.localStorage.getItem(k); } catch (e) { return null; } }
+function sset(k, v) { try { if (v == null) window.localStorage.removeItem(k); else window.localStorage.setItem(k, v); } catch (e) {} }
+function toast(m) { var t = $('toast'); t.textContent = m; t.style.display = 'block'; clearTimeout(S.tt); S.tt = setTimeout(function () { t.style.display = 'none'; }, 3500); }
+function fmtCpf(v) { var d = digits(v).slice(0, 11); return d.replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d{1,2})$/, '$1-$2'); }
+function fmtFone(v) {
+  var d = digits(v); if (d.length > 11 && d.indexOf('55') === 0) d = d.slice(2); d = d.slice(0, 11);
+  if (d.length <= 2) return d.length ? '(' + d : '';
+  if (d.length <= 6) return '(' + d.slice(0, 2) + ') ' + d.slice(2);
+  if (d.length <= 10) return '(' + d.slice(0, 2) + ') ' + d.slice(2, 6) + '-' + d.slice(6);
+  return '(' + d.slice(0, 2) + ') ' + d.slice(2, 7) + '-' + d.slice(7);
+}
+function cpfOk(c) {
+  c = digits(c); if (!/^\d{11}$/.test(c) || /^(\d)\1{10}$/.test(c)) return false;
+  for (var t = 9; t < 11; t++) { var s = 0; for (var i = 0; i < t; i++) s += +c[i] * (t + 1 - i); if (((s * 10) % 11) % 10 !== +c[t]) return false; }
+  return true;
+}
+function passKey(v) { return String(v || '').toUpperCase().replace(/[^A-Z0-9]/g, ''); }
+function docKey(v, pass) { return pass ? passKey(v) : digits(v); }
+function docOk(v, pass) { return pass ? /^[A-Z0-9]{5,20}$/.test(passKey(v)) : cpfOk(v); }
+function fmtDoc(me) { return me.tipo_doc === 'PASSAPORTE' ? 'Passaporte ' + esc(me.cpf) : 'CPF ' + fmtCpf(me.cpf); }
+function docField(id, onInput) {
+  var p = S.pass;
+  return '<div class="fld"><label for="' + id + '">' + (p ? 'Número do passaporte' : 'CPF (o mesmo cadastrado no ingresso)') + '</label>' +
+    '<input class="in" id="' + id + '" ' + (p ? 'autocapitalize="characters" placeholder="Ex.: FX123456"' : 'inputmode="numeric" placeholder="000.000.000-00"') + ' autocomplete="off" oninput="' + (p ? 'this.value=passKey(this.value)' : 'this.value=fmtCpf(this.value)') + (onInput ? ';' + onInput : '') + '">' +
+    '<div class="hint" id="h' + id + '"></div><button type="button" class="lnk" style="font-size:13px;margin-top:6px" onclick="togglePass()">' + (p ? 'Tenho CPF' : 'Estrangeiro? Usar passaporte') + '</button></div>';
+}
+function togglePass() { S.pass = !S.pass; if (S.tab === 'minhas' && !$('ov').classList.contains('show')) renderMinhas(); else if (S.sel) openBook(S.sel.id); }
+function foneOk(v) { var d = digits(v); return d.length === 10 || d.length === 11 || (d.length >= 12 && d.length <= 13 && d.indexOf('55') === 0); }
+
+/* ============================== API ============================== */
+function api(action, body) {
+  if (DEMO) return new Promise(function (res, rej) { setTimeout(function () { try { res(demo(action, body || {})); } catch (e) { rej(e); } }, action === 'grade' ? 350 : 650); });
+  if (action === 'grade') {
+    return fetch(API_URL + '?action=grade&t=' + Date.now()).then(function (r) { return r.json(); })
+      .then(function (j) { if (!j.ok) throw new Error(j.error); return j.data; });
+  }
+  body = body || {}; body.action = action;
+  return fetch(API_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(body) })
+    .then(function (r) { return r.json(); })
+    .then(function (j) { if (!j.ok) throw new Error(j.error || 'Não foi possível concluir. Tente de novo.'); return j.result; });
+}
+function netErr(e) { var m = (e && e.message) || ''; return /fetch|network|load failed/i.test(m) ? 'Sem conexão. Verifique sua internet e tente de novo.' : m; }
+
+/* ============================== LOAD ============================== */
+function load(silent) {
+  return api('grade').then(function (g) {
+    S.g = g; S.skew = g.agora ? g.agora - Date.now() : 0;
+    var c = g.config || {};
+    if (c.titulo) document.title = c.titulo + " · Let's Pipa";
+    if (c.subtitulo) $('hSub').textContent = c.subtitulo;
+    renderFoot();
+    if (!S.day || !dias().some(function (d) { return d === S.day; })) S.day = pickDay();
+    if (S.tab === 'aulas' && !$('ov').classList.contains('show')) renderAulas();
+    else if (S.tab === 'aulas' && !silent) renderAulas();
+  }).catch(function (e) {
+    if (!silent) $('view').innerHTML = '<div class="empty">' + esc(netErr(e) || 'Não foi possível carregar as aulas.') + '<br><br><button class="btn dark sm" onclick="load()">Tentar de novo</button></div>';
+  });
+}
+function dias() { var o = []; (S.g ? S.g.aulas : []).forEach(function (a) { if (o.indexOf(a.data) < 0) o.push(a.data); }); return o.sort(); }
+function pickDay() {
+  var ds = dias(), t = now();
+  for (var i = 0; i < ds.length; i++) {
+    var open = S.g.aulas.some(function (a) { return a.data === ds[i] && ts(a.data, a.inicio) > t; });
+    if (open) return ds[i];
+  }
+  return ds[0] || '';
+}
+
+/* ============================== RENDER ============================== */
+function renderLogos() {
+  var lp = LOGO_LETSPIPA ? '<img src="' + esc(LOGO_LETSPIPA) + '" alt="Let\'s Pipa">' : '<span class="wm">Let\'s Pipa</span>';
+  var bt = LOGO_BODYTECH ? '<img src="' + esc(LOGO_BODYTECH) + '" alt="Bodytech">' : '<span class="wm">Bodytech</span>';
+  $('logos').innerHTML = lp + '<span class="x">×</span>' + bt;
+}
+function renderFoot() {
+  var c = (S.g && S.g.config) || {}, sup = digits(c.suporte);
+  $('foot').innerHTML = (c.local ? esc(c.local) + '<br>' : '') + (sup ? 'Dúvidas? <a href="https://wa.me/' + sup + '" target="_blank" rel="noopener">Fale com a gente no WhatsApp</a><br>' : '') + '<span style="opacity:.7">Organização Let\'s Pipa · Aulas Bodytech</span>';
+}
+function setTab(t) {
+  S.tab = t; $('tAulas').className = t === 'aulas' ? 'on' : ''; $('tMinhas').className = t === 'minhas' ? 'on' : '';
+  if (t === 'aulas') renderAulas(); else renderMinhas();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function myMap() {
+  var m = {};
+  (S.mine || []).forEach(function (i) { m[i.aula_id] = i; });
+  return m;
+}
+function renderAulas() {
+  if (S.tab !== 'aulas') return;
+  if (!S.g) { $('view').innerHTML = '<div class="skel"></div><div class="skel"></div><div class="skel"></div>'; return; }
+  var c = S.g.config || {}, t = now(), my = myMap();
+  var h = '';
+  if (!c.abertas) h += '<div class="notice">As inscrições ainda não estão abertas. Volte em breve!</div>';
+  h += '<div class="days" id="days">';
+  dias().forEach(function (d) {
+    var p = pd(d), past = !S.g.aulas.some(function (a) { return a.data === d && ts(a.data, a.inicio) > t; });
+    var mineDay = S.g.aulas.some(function (a) { return a.data === d && my[a.id]; });
+    h += '<button class="day' + (d === S.day ? ' on' : '') + (past ? ' past' : '') + '" onclick="S.day=\'' + d + '\';renderAulas()"><div class="w">' + WD[wday(d)] + '</div><div class="d">' + p.d + '</div><div class="m">' + MES[p.m - 1] + '</div>' + (mineDay ? '<i class="dot"></i>' : '') + '</button>';
+  });
+  h += '</div>';
+  var list = S.g.aulas.filter(function (a) { return a.data === S.day; });
+  if (S.day) h += '<div class="dayhead"><h2>' + dLong(S.day) + '</h2><span>' + list.length + ' aula' + (list.length === 1 ? '' : 's') + '</span></div>';
+  if (!list.length) h += '<div class="empty">Nenhuma aula neste dia.</div>';
+  list.forEach(function (a) {
+    var ended = ts(a.data, a.inicio) <= t, full = a.confirmadas >= a.capacidade, pct = Math.min(100, a.confirmadas / a.capacidade * 100);
+    var livres = Math.max(0, a.capacidade - a.confirmadas), mi = my[a.id];
+    var btn;
+    if (mi) btn = '<span class="pill ' + (mi.status === 'CONFIRMADA' ? 'ok">✓ Você está inscrito(a)' : 'warn">Você está na lista de espera · ' + mi.posicao + 'º') + '</span>';
+    else if (ended) btn = '<span class="pill mut">Aula encerrada</span>';
+    else if (!c.abertas) btn = '<button class="btn" disabled>Inscrições em breve</button>';
+    else if (full) btn = '<button class="btn wait" onclick="openBook(\'' + a.id + '\')">Entrar na lista de espera' + (a.espera ? ' · ' + a.espera + ' na fila' : '') + '</button>';
+    else btn = '<button class="btn" onclick="openBook(\'' + a.id + '\')">Reservar minha vaga</button>';
+    h += '<div class="cls' + (ended ? ' ended' : '') + '"><div class="tm"><b>' + esc(a.inicio) + '</b><span>até ' + esc(a.fim) + '</span></div><div>' +
+      '<h3>' + esc(a.modalidade) + '</h3><div class="meta">' + [a.instrutor ? 'com ' + esc(a.instrutor) : '', esc(a.local)].filter(Boolean).join(' · ') + '</div>' +
+      (a.descricao ? '<div class="desc">' + esc(a.descricao) + '</div>' : '') +
+      (ended ? '' : '<div class="bar"><i class="' + (full ? 'full' : pct >= 80 ? 'hi' : '') + '" style="width:' + pct + '%"></i></div><div class="vag"><span>' + (full ? '<b>Lotada</b>' : '<b>' + livres + '</b> vaga' + (livres === 1 ? '' : 's') + ' livre' + (livres === 1 ? '' : 's')) + '</span><span>' + a.confirmadas + '/' + a.capacidade + '</span></div>') +
+      btn + '</div></div>';
+  });
+  $('view').innerHTML = h;
+  var on = document.querySelector('.day.on'); if (on) on.scrollIntoView({ block: 'nearest', inline: 'center' });
+}
+
+/* ============================== RESERVA ============================== */
+function aulaById(id) { return (S.g.aulas || []).filter(function (a) { return a.id === id; })[0]; }
+function openBook(id) {
+  var a = aulaById(id); if (!a) return;
+  S.sel = a;
+  var me = S.me || {}, full = a.confirmadas >= a.capacidade;
+  var h = '<button class="close" onclick="closeSheet()">×</button><h3>' + (full ? 'Lista de espera' : 'Reservar vaga') + '</h3>' +
+    '<div class="sum"><b>' + esc(a.modalidade) + '</b><br>' + dLong(a.data) + ' · ' + esc(a.inicio) + ' às ' + esc(a.fim) + (a.instrutor ? '<br>com ' + esc(a.instrutor) : '') + '</div>';
+  if (full) h += '<div class="notice">Esta aula está lotada. Você entra na lista de espera' + (a.espera ? ' (' + a.espera + ' na sua frente)' : '') + ' e, se uma vaga abrir, sua inscrição é <b>confirmada automaticamente</b> e você recebe aviso no WhatsApp.</div>';
+  h += '<div class="err" id="bErr"></div>';
+  if (me.cpf) {
+    h += '<div class="me"><div>Reservando como <b>' + esc(me.nome) + '</b><br><span style="color:var(--mut);font-size:13px">' + fmtDoc(me) + ' · ' + fmtFone(me.whatsapp) + '</span></div><button class="lnk" onclick="S.me=null;sset(\'arena_me\',null);openBook(\'' + a.id + '\')">Trocar</button></div>' +
+      '<input type="hidden" id="fCpf" value="' + esc(me.cpf) + '"><input type="hidden" id="fTipo" value="' + esc(me.tipo_doc || 'CPF') + '"><input type="hidden" id="fNome" value="' + esc(me.nome) + '"><input type="hidden" id="fWa" value="' + esc(me.whatsapp) + '">';
+  } else {
+    h += docField('fCpf', 'cpfCheck()') +
+      '<div class="fld"><label for="fNome">Nome completo</label><input class="in" id="fNome" autocomplete="name" placeholder="Nome e sobrenome"></div>' +
+      '<div class="fld"><label for="fWa">WhatsApp</label><input class="in" id="fWa" inputmode="tel" autocomplete="tel" placeholder="(84) 99999-9999" oninput="this.value=fmtFone(this.value)"><div class="hint">Você recebe a confirmação por aqui.</div></div>';
+  }
+  h += '<label class="chk"><input type="checkbox" id="fTermo"' + (me.termo === (S.g.config.termo_versao || 'v1') ? ' checked' : '') + '><span>Li e aceito o <button type="button" class="lnk" onclick="event.preventDefault();openTermo()">termo de responsabilidade</button> para a prática de atividade física.</span></label>' +
+    '<button class="btn" id="bGo" onclick="book()">' + (full ? 'Entrar na lista de espera' : 'Confirmar reserva') + '</button>' +
+    '<p class="hint" style="text-align:center;margin-top:10px">Cancelamento até ' + (S.g.config.cancel_min || 30) + ' min antes da aula, em "Minhas aulas".</p>';
+  showSheet(h);
+}
+var cpfT = null;
+function cpfCheck() {
+  var el = $('fCpf'), hn = $('hfCpf'), p = S.pass, v = docKey(el.value, p);
+  el.classList.remove('bad'); hn.className = 'hint'; hn.textContent = '';
+  if (p ? v.length < 6 : v.length < 11) return;
+  if (!docOk(v, p)) { el.classList.add('bad'); hn.className = 'hint bad'; hn.textContent = p ? 'Passaporte inválido.' : 'CPF inválido. Confira os números.'; return; }
+  hn.textContent = 'Verificando ingresso…';
+  clearTimeout(cpfT);
+  cpfT = setTimeout(function () {
+    api('validar', { cpf: v, tipo_doc: p ? 'PASSAPORTE' : 'CPF' }).then(function () { if ($('fCpf') && docKey($('fCpf').value, p) === v) { hn.className = 'hint ok'; hn.textContent = '✓ Ingresso da Arena encontrado'; } })
+      .catch(function (e) { if ($('fCpf') && docKey($('fCpf').value, p) === v) { el.classList.add('bad'); hn.className = 'hint bad'; hn.textContent = netErr(e); } });
+  }, p ? 700 : 250);
+}
+function bErr(m) { var e = $('bErr'); e.textContent = m; e.style.display = m ? 'block' : 'none'; if (m) e.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); }
+function book() {
+  if (S.busy) return;
+  var pass = $('fTipo') ? $('fTipo').value === 'PASSAPORTE' : !!S.pass;
+  var cpf = docKey($('fCpf').value, pass), nome = $('fNome').value.replace(/\s+/g, ' ').trim(), wa = $('fWa').value, termo = $('fTermo').checked;
+  if (!docOk(cpf, pass)) return bErr(pass ? 'Informe o número do passaporte.' : 'Informe um CPF válido.');
+  if (nome.split(' ').length < 2) return bErr('Informe nome e sobrenome.');
+  if (!foneOk(wa)) return bErr('Informe o WhatsApp com DDD.');
+  if (!termo) return bErr('Para reservar, aceite o termo de responsabilidade.');
+  bErr('');
+  S.busy = true; var b = $('bGo'), t0 = b.innerHTML; b.disabled = true; b.innerHTML = '<span class="spin"></span>Reservando…';
+  var a = S.sel;
+  api('inscrever', { aula_id: a.id, cpf: cpf, tipo_doc: pass ? 'PASSAPORTE' : 'CPF', nome: nome, whatsapp: digits(wa), termo: true, termo_versao: S.g.config.termo_versao })
+    .then(function (r) {
+      S.busy = false;
+      S.me = { cpf: cpf, tipo_doc: pass ? 'PASSAPORTE' : 'CPF', nome: nome, whatsapp: digits(wa), termo: S.g.config.termo_versao || 'v1' };
+      sset('arena_me', JSON.stringify(S.me));
+      showDone(r.inscricao, r.cancel_min);
+      refreshMine(true); load(true);
+    })
+    .catch(function (e) { S.busy = false; b.disabled = false; b.innerHTML = t0; bErr(netErr(e)); });
+}
+function showDone(i, cmin) {
+  var conf = i.status === 'CONFIRMADA';
+  var h = '<div class="done"><div class="ic' + (conf ? '' : ' w') + '">' + (conf ? '✓' : '⏳') + '</div>' +
+    '<h3>' + (conf ? 'Vaga confirmada!' : 'Você está na lista de espera') + '</h3>' +
+    '<p style="color:var(--mut);margin:4px 0 0">' + (conf ? 'Te esperamos lá, ' + esc(i.nome.split(' ')[0]) + '!' : 'Posição <b style="color:var(--ink)">' + i.posicao + 'º</b>. Se abrir vaga, você é confirmado(a) automaticamente e avisado(a) no WhatsApp.') + '</p>' +
+    '<div class="ticket"><div class="r"><span>Aula</span><b>' + esc(i.modalidade) + '</b></div><div class="r"><span>Dia</span><b>' + dLong(i.data) + '</b></div><div class="r"><span>Horário</span><b>' + esc(i.inicio) + (i.fim ? ' às ' + esc(i.fim) : '') + '</b></div>' +
+    (i.instrutor ? '<div class="r"><span>Instrutor</span><b>' + esc(i.instrutor) + '</b></div>' : '') +
+    '<div class="r"><span>Código</span><span class="code">' + esc(i.codigo) + '</span></div></div>' +
+    '<p class="hint" style="margin:-4px 0 16px">Enviamos os detalhes no seu WhatsApp. Cancelamento até ' + (cmin || 30) + ' min antes, em "Minhas aulas".</p>' +
+    '<div class="stack">' + (conf ? '<button class="btn dark" onclick="ics(\'' + i.id + '\')">📅 Adicionar à agenda</button>' : '') +
+    '<button class="btn" onclick="closeSheet()">Reservar outra aula</button><button class="btn line" onclick="closeSheet();setTab(\'minhas\')">Ver minhas aulas</button></div></div>';
+  S.lastDone = i;
+  showSheet(h);
+}
+function ics(id) {
+  var i = S.lastDone && S.lastDone.id === id ? S.lastDone : (S.mine || []).filter(function (x) { return x.id === id; })[0];
+  if (!i) return;
+  function f(d, h) { var t = new Date(ts(d, h)); return t.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, ''); }
+  var c = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Lets Pipa//Arena Wellness//PT', 'BEGIN:VEVENT', 'UID:' + i.id + '@arena-letspipa',
+    'DTSTAMP:' + f('2026-01-01', '00:00'), 'DTSTART:' + f(i.data, i.inicio), 'DTEND:' + f(i.data, i.fim || i.inicio),
+    'SUMMARY:' + i.modalidade + ' · Arena Wellness by Bodytech', 'LOCATION:' + ((S.g.config && S.g.config.local) || "Let's Pipa"),
+    'DESCRIPTION:Código ' + i.codigo, 'BEGIN:VALARM', 'TRIGGER:-PT45M', 'ACTION:DISPLAY', 'DESCRIPTION:Aula na Arena Wellness', 'END:VALARM', 'END:VEVENT', 'END:VCALENDAR'].join('\r\n');
+  var a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([c], { type: 'text/calendar' })); a.download = 'arena-' + i.codigo + '.ics';
+  document.body.appendChild(a); a.click(); setTimeout(function () { a.remove(); }, 400);
+}
+function openTermo() {
+  S.back = $('sheet').innerHTML; S.backVals = { cpf: $('fCpf') && $('fCpf').value, nome: $('fNome') && $('fNome').value, wa: $('fWa') && $('fWa').value };
+  showSheet('<button class="close" onclick="backFromTermo(false)">×</button><h3>Termo de responsabilidade</h3><div class="termo" style="margin:14px 0 18px">' + esc(S.g.config.termo || '') + '</div><button class="btn dark" onclick="backFromTermo(true)">Li e aceito</button>');
+}
+function backFromTermo(ok) {
+  showSheet(S.back);
+  var v = S.backVals || {};
+  if ($('fCpf') && v.cpf != null) $('fCpf').value = v.cpf;
+  if ($('fNome') && v.nome != null) $('fNome').value = v.nome;
+  if ($('fWa') && v.wa != null) $('fWa').value = v.wa;
+  if (ok) $('fTermo').checked = true;
+}
+function showSheet(h) { $('sheet').innerHTML = h; $('ov').classList.add('show'); document.body.style.overflow = 'hidden'; $('sheet').scrollTop = 0; }
+function closeSheet() { $('ov').classList.remove('show'); document.body.style.overflow = ''; if (S.tab === 'aulas') renderAulas(); else renderMinhas(); }
+
+/* ============================== MINHAS AULAS ============================== */
+function refreshMine(silent) {
+  if (!S.me) return Promise.resolve();
+  return api('minhas', { cpf: S.me.cpf, tipo_doc: S.me.tipo_doc || 'CPF', whatsapp: S.me.whatsapp }).then(function (r) {
+    S.mine = r.inscricoes; S.mineCancel = r.cancel_min; S.mineErr = '';
+    var n = S.mine.length; $('myCnt').textContent = n; $('myCnt').style.display = n ? '' : 'none';
+    if (S.tab === 'minhas') renderMinhas(); else if (!$('ov').classList.contains('show')) renderAulas();
+  }).catch(function (e) { S.mineErr = netErr(e); if (!silent && S.tab === 'minhas') renderMinhas(); });
+}
+function renderMinhas() {
+  if (S.tab !== 'minhas') return;
+  var h = '';
+  if (!S.me) {
+    h += '<div class="mine"><h4 style="margin-bottom:4px">Consultar minhas aulas</h4><p class="hint" style="margin:0 0 14px">Use o CPF e o WhatsApp informados na reserva.</p><div class="err" id="mErr"></div>' +
+      docField('mCpf') +
+      '<div class="fld"><label>WhatsApp</label><input class="in" id="mWa" inputmode="tel" placeholder="(84) 99999-9999" oninput="this.value=fmtFone(this.value)"></div>' +
+      '<button class="btn dark" id="mGo" onclick="lookup()">Ver minhas aulas</button></div>';
+    $('view').innerHTML = h; return;
+  }
+  h += '<div class="me"><div><b>' + esc(S.me.nome) + '</b><br><span style="color:var(--mut);font-size:13px">' + fmtDoc(S.me) + '</span></div><button class="lnk" onclick="logoutMe()">Sair</button></div>';
+  if (S.mineErr) h += '<div class="notice">' + esc(S.mineErr) + '</div>';
+  if (S.mine == null) { h += '<div class="skel" style="height:90px"></div>'; $('view').innerHTML = h; return; }
+  if (!S.mine.length) h += '<div class="empty">Você ainda não tem aulas reservadas.<br><br><button class="btn sm" onclick="setTab(\'aulas\')">Ver aulas disponíveis</button></div>';
+  var t = now(), cm = S.mineCancel || 30;
+  S.mine.forEach(function (i) {
+    var st = ts(i.data, i.inicio), ended = st <= t, canCancel = i.status === 'ESPERA' ? !ended : st - t >= cm * 60000;
+    var pill = ended ? '<span class="pill mut">Realizada</span>' : i.status === 'CONFIRMADA' ? '<span class="pill ok">Confirmada</span>' : '<span class="pill warn">Espera · ' + i.posicao + 'º</span>';
+    h += '<div class="mine"' + (ended ? ' style="opacity:.6"' : '') + '><div class="top"><div><h4>' + esc(i.modalidade) + '</h4><div class="meta">' + dLong(i.data) + ' · ' + esc(i.inicio) + (i.fim ? '–' + esc(i.fim) : '') + '</div></div>' + pill + '</div>' +
+      '<div class="act"><span>Código <b class="code" style="font-size:13px;letter-spacing:1.5px;color:var(--ink)">' + esc(i.codigo) + '</b></span>' +
+      (ended ? '' : canCancel ? '<button class="btn line sm" onclick="askCancel(\'' + i.id + '\')">' + (i.status === 'ESPERA' ? 'Sair da fila' : 'Cancelar') + '</button>' : '<span>Cancelamento encerrado</span>') + '</div></div>';
+  });
+  $('view').innerHTML = h;
+}
+function lookup() {
+  var pass = !!S.pass, cpf = docKey($('mCpf').value, pass), wa = digits($('mWa').value), e = $('mErr');
+  function err(m) { e.textContent = m; e.style.display = 'block'; }
+  if (!docOk(cpf, pass)) return err(pass ? 'Informe o número do passaporte.' : 'Informe um CPF válido.');
+  if (!foneOk(wa)) return err('Informe o WhatsApp com DDD.');
+  var b = $('mGo'); b.disabled = true; b.innerHTML = '<span class="spin"></span>Buscando…';
+  api('minhas', { cpf: cpf, tipo_doc: pass ? 'PASSAPORTE' : 'CPF', whatsapp: wa }).then(function (r) {
+    var nome = r.inscricoes[0] ? r.inscricoes[0].nome : '';
+    S.me = { cpf: cpf, tipo_doc: pass ? 'PASSAPORTE' : 'CPF', nome: nome || 'Você', whatsapp: wa, termo: '' };
+    if (nome) sset('arena_me', JSON.stringify(S.me));
+    S.mine = r.inscricoes; S.mineCancel = r.cancel_min; S.mineErr = '';
+    $('myCnt').textContent = S.mine.length; $('myCnt').style.display = S.mine.length ? '' : 'none';
+    renderMinhas();
+  }).catch(function (x) { b.disabled = false; b.textContent = 'Ver minhas aulas'; err(netErr(x)); });
+}
+function logoutMe() { S.me = null; S.mine = null; sset('arena_me', null); $('myCnt').style.display = 'none'; renderMinhas(); }
+function askCancel(id) {
+  var i = S.mine.filter(function (x) { return x.id === id; })[0]; if (!i) return;
+  showSheet('<button class="close" onclick="closeSheet()">×</button><h3>' + (i.status === 'ESPERA' ? 'Sair da lista de espera?' : 'Cancelar reserva?') + '</h3>' +
+    '<div class="sum"><b>' + esc(i.modalidade) + '</b><br>' + dLong(i.data) + ' · ' + esc(i.inicio) + '</div>' +
+    '<p style="color:var(--mut);font-size:14px;margin:0 0 16px">' + (i.status === 'CONFIRMADA' ? 'Sua vaga será liberada para a próxima pessoa da lista de espera.' : 'Você perde sua posição na fila.') + '</p>' +
+    '<div class="err" id="cErr"></div><div class="stack"><button class="btn" id="cGo" style="background:var(--crit)" onclick="doCancel(\'' + id + '\')">Sim, cancelar</button><button class="btn line" onclick="closeSheet()">Voltar</button></div>');
+}
+function doCancel(id) {
+  var b = $('cGo'); b.disabled = true; b.innerHTML = '<span class="spin"></span>Cancelando…';
+  api('cancelar', { id: id, cpf: S.me.cpf, tipo_doc: S.me.tipo_doc || 'CPF', whatsapp: S.me.whatsapp }).then(function () {
+    closeSheet(); toast('Reserva cancelada'); refreshMine(); load(true);
+  }).catch(function (e) { b.disabled = false; b.textContent = 'Sim, cancelar'; var x = $('cErr'); x.textContent = netErr(e); x.style.display = 'block'; });
+}
+
+/* ============================== DEMO ============================== */
+var DD = null;
+function demoInit() {
+  var dias = ['2026-12-27', '2026-12-28', '2026-12-29', '2026-12-30', '2026-12-31', '2027-01-01', '2027-01-02'];
+  var slots = [['08:00', '09:00', 'Funcional na areia', 'Carol'], ['09:30', '10:30', 'Yoga ao nascer do sol', 'Marina'], ['11:00', '12:00', 'Beach HIIT', 'Rafa'], ['12:30', '13:30', 'Mobilidade & Alongamento', 'Ju']];
+  var a = [], seed = 7;
+  function rnd() { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; }
+  dias.forEach(function (d, di) { slots.forEach(function (s, i) {
+    var c = Math.floor(rnd() * 50); if (di === 0 && i === 1) c = 50; if (di === 1 && i === 2) c = 48;
+    a.push({ id: 'A' + di + i, data: d, inicio: s[0], fim: s[1], modalidade: s[2], instrutor: s[3], local: 'Arena principal', descricao: '', capacidade: 50, confirmadas: c, espera: c === 50 ? 3 : 0 });
+  }); });
+  DD = { aulas: a, insc: [], config: { titulo: 'Arena Wellness by Bodytech', subtitulo: "Let's Pipa · 27/12 a 02/01 · das 8h às 14h", local: 'Arena Wellness · Praia da Pipa', termo: 'TERMO DE RESPONSABILIDADE (exemplo)\n\nAo confirmar minha inscrição, declaro estar apto(a) à prática de atividade física, ciente dos riscos, e autorizo o uso dos meus dados para gestão das inscrições conforme a LGPD.', termo_versao: 'v1', cancel_min: 30, abertas: true, suporte: '5584999999999' } };
+}
+function demo(action, b) {
+  if (!DD) demoInit();
+  var fakeNow = Date.UTC(2026, 11, 27, 9, 0) + 3 * 3600000; // simula 27/12 às 09:00 em Pipa
+  if (action === 'grade') {
+    return { aulas: DD.aulas.map(function (a) { var o = JSON.parse(JSON.stringify(a)); o.situacao = ts(a.data, a.inicio) <= fakeNow ? 'encerrada' : a.confirmadas >= a.capacidade ? 'lotada' : 'aberta'; return o; }), config: DD.config, agora: fakeNow };
+  }
+  if (action === 'validar') { if (b.tipo_doc === 'PASSAPORTE') return { ok: true }; if (!cpfOk(b.cpf)) throw new Error('CPF inválido. Confira os números.'); if (digits(b.cpf) === '11144477735') throw new Error('Não encontramos um ingresso da Arena Wellness para este documento. Use o mesmo CPF cadastrado no ingresso (Baladapp).'); return { ok: true }; }
+  if (action === 'inscrever') {
+    demo('validar', b);
+    var a = DD.aulas.filter(function (x) { return x.id === b.aula_id; })[0];
+    if (DD.insc.some(function (i) { return i.aula_id === a.id && i.cpf === b.cpf && i.status !== 'CANCELADA'; })) throw new Error('Você já está inscrito(a) nesta aula.');
+    var conf = a.confirmadas < a.capacidade, pos = 0;
+    if (conf) a.confirmadas++; else { a.espera++; pos = a.espera; }
+    var i = { id: 'I' + Date.now(), codigo: Math.random().toString(36).slice(2, 8).toUpperCase(), aula_id: a.id, data: a.data, inicio: a.inicio, fim: a.fim, modalidade: a.modalidade, instrutor: a.instrutor, nome: b.nome, cpf: b.cpf, whatsapp: b.whatsapp, status: conf ? 'CONFIRMADA' : 'ESPERA', posicao: pos };
+    DD.insc.push(i);
+    return { inscricao: i, cancel_min: 30 };
+  }
+  if (action === 'minhas') return { inscricoes: DD.insc.filter(function (i) { return i.cpf === b.cpf && i.status !== 'CANCELADA'; }), cancel_min: 30 };
+  if (action === 'cancelar') {
+    var x = DD.insc.filter(function (i) { return i.id === b.id; })[0]; var au = DD.aulas.filter(function (y) { return y.id === x.aula_id; })[0];
+    if (x.status === 'CONFIRMADA') { if (au.espera) au.espera--; else au.confirmadas--; } else au.espera--;
+    x.status = 'CANCELADA'; return { ok: true };
+  }
+}
+
+/* ============================== INIT ============================== */
+(function () {
+  renderLogos();
+  if (DEMO) { var d = document.createElement('div'); d.className = 'demo'; d.textContent = 'DEMO'; document.body.appendChild(d); }
+  try { var m = JSON.parse(sget('arena_me') || 'null'); if (m && m.cpf) S.me = m; } catch (e) {}
+  renderAulas();
+  load().then(function () { refreshMine(true); });
+  S.timer = setInterval(function () { if (!document.hidden && !$('ov').classList.contains('show')) load(true); }, 30000);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && $('ov').classList.contains('show')) closeSheet(); });
+})();
+</script>
+</body>
+</html>

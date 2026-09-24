@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Arena Wellness · Painel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3efe6;--card:#fff;--ink:#0f3b4a;--mut:#6f7f86;--line:#e5ddcd;--soft:#faf7f1;--acc:#e9724c;--sun:#f2b544;--ok:#2a9d8f;--okbg:#e2f3f0;--warn:#b7791f;--warnbg:#fdf2dc;--crit:#c94040;--critbg:#fbe5e5}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--ink);font-size:14px;line-height:1.4}
+button{font:inherit;cursor:pointer}
+header{background:var(--ink);color:#fff;padding:0 20px;height:58px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:30}
+.brand{font-family:Fraunces,Georgia,serif;font-size:19px}
+.brand small{display:block;font-family:Inter,sans-serif;font-size:10px;opacity:.65;letter-spacing:2px;text-transform:uppercase}
+.sp{flex:1}
+.pill{font-size:12px;padding:5px 10px;border-radius:99px;background:rgba(255,255,255,.12);white-space:nowrap}
+.pill.demo{background:var(--acc)}
+.hb{background:rgba(255,255,255,.12);color:#fff;border:0;border-radius:8px;padding:7px 11px;font-size:13px}
+nav{display:flex;gap:4px;overflow-x:auto;padding:8px 16px;background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:58px;z-index:29;scrollbar-width:none}
+nav button{border:0;background:none;padding:8px 14px;border-radius:8px;font-weight:500;color:var(--mut);white-space:nowrap}
+nav button.on{background:var(--ink);color:#fff}
+main{max-width:1280px;margin:0 auto;padding:20px 16px 80px}
+h2{font-family:Fraunces,Georgia,serif;font-size:24px;margin:4px 0 6px;font-weight:600}
+.sub{color:var(--mut);font-size:13px;margin:0 0 18px}
+h3{font-size:15px;margin:0 0 12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:16px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:16px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.kpi .l{font-size:11px;color:var(--mut);text-transform:uppercase;letter-spacing:.8px;font-weight:600}
+.kpi .v{font-size:26px;font-weight:700;margin-top:4px;font-variant-numeric:tabular-nums}
+.kpi .s{font-size:12px;color:var(--mut)}
+.grid{display:grid;gap:10px}
+.dayrow{display:grid;grid-template-columns:120px 1fr;gap:12px;align-items:start;padding:12px 0;border-bottom:1px solid var(--line)}
+.dayrow:last-child{border-bottom:0}
+.dayrow .dl b{display:block;font-size:15px}
+.dayrow .dl span{font-size:12px;color:var(--mut)}
+.slots{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:8px}
+.slot{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--soft);text-align:left;color:var(--ink)}
+.slot:hover{border-color:var(--ink)}
+.slot .t{font-size:12px;color:var(--mut)}
+.slot .n{font-weight:600;margin:2px 0 6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar{height:6px;background:#ebe3d3;border-radius:3px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--ok)}
+.bar i.hi{background:var(--sun)}.bar i.full{background:var(--acc)}
+.slot .c{display:flex;justify-content:space-between;font-size:12px;margin-top:5px;color:var(--mut)}
+.slot .c b{color:var(--ink)}
+.slot.off{opacity:.5}
+.row{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end}
+.fld{display:flex;flex-direction:column;gap:4px;min-width:140px;flex:1}
+.fld label{font-size:12px;font-weight:600;color:var(--mut)}
+.in,select.in,textarea.in{font:inherit;padding:9px 10px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);width:100%}
+textarea.in{min-height:260px;resize:vertical;line-height:1.5}
+.btn{font-weight:600;border:0;border-radius:9px;padding:9px 14px;background:var(--ink);color:#fff;white-space:nowrap}
+.btn.acc{background:var(--acc)}.btn.line{background:#fff;color:var(--ink);border:1px solid var(--line)}
+.btn.red{background:#fff;color:var(--crit);border:1px solid #efc6c6}
+.btn.sm{padding:5px 9px;font-size:12px}
+.btn:disabled{opacity:.5}
+.tw{overflow-x:auto}
+table.t{width:100%;border-collapse:collapse;font-size:13px}
+.t th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--mut);font-weight:600;padding:8px 10px;border-bottom:1px solid var(--line);background:var(--soft);white-space:nowrap}
+.t td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:middle}
+.t tr.cx td{opacity:.45}
+.t .n{text-align:right;font-variant-numeric:tabular-nums}
+.t small{display:block;color:var(--mut)}
+.b{display:inline-block;font-size:11px;font-weight:600;padding:3px 8px;border-radius:99px;white-space:nowrap}
+.b.ok{background:var(--okbg);color:#1d7a6e}.b.warn{background:var(--warnbg);color:var(--warn)}.b.mut{background:#eee;color:#666}.b.crit{background:var(--critbg);color:var(--crit)}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.chip{border:1px solid var(--line);background:#fff;border-radius:99px;padding:6px 12px;font-size:13px;font-weight:500}
+.chip.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.note{background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:13px;color:var(--mut)}
+.note.warn{background:var(--warnbg);border-color:#efd8a8;color:#7a4d00}
+.note.ok{background:var(--okbg);border-color:#bfe3dc;color:#1d6a60}
+.muted{color:var(--mut)}.right{text-align:right}.mt{margin-top:12px}
+.flex{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.drop{border:2px dashed var(--line);border-radius:14px;padding:26px;text-align:center;background:var(--soft);cursor:pointer}
+.drop:hover{border-color:var(--ink)}
+.tpl{background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:12px;margin-bottom:10px;font-size:13px}
+.tpl code{font-family:ui-monospace,Menlo,monospace;background:#fff;border:1px solid var(--line);padding:1px 5px;border-radius:4px}
+.tpl p{margin:6px 0 0;white-space:pre-wrap}
+#ov{position:fixed;inset:0;background:var(--ink);z-index:100;display:flex;align-items:center;justify-content:center;padding:16px}
+#ov .box{background:#fff;border-radius:18px;padding:28px;width:100%;max-width:370px}
+#modal{position:fixed;inset:0;background:rgba(15,59,74,.5);z-index:80;display:none;align-items:flex-start;justify-content:center;padding:40px 16px;overflow:auto}
+#modal .box{background:#fff;border-radius:16px;padding:22px;width:100%;max-width:640px}
+#busy{position:fixed;inset:0;background:rgba(15,59,74,.4);z-index:90;display:none;align-items:center;justify-content:center}
+#busy .box{background:#fff;border-radius:12px;padding:16px 22px;font-weight:600}
+#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:11px 16px;border-radius:10px;z-index:110;display:none;max-width:90vw}
+#toast.err{background:var(--crit)}
+@media print{header,nav,.noprint{display:none!important}main{padding:0}.card{border:0;padding:0}}
+@media (max-width:700px){.dayrow{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div id="ov"><div class="box">
+  <div class="brand" style="color:var(--ink);font-size:24px;margin-bottom:18px">Arena Wellness<small style="color:var(--mut);opacity:1">Painel de gestão</small></div>
+  <div class="fld" style="margin-bottom:12px"><label>Seu nome</label><input id="lgU" class="in" autocomplete="name"></div>
+  <div class="fld" style="margin-bottom:16px"><label>Senha</label><input id="lgP" class="in" type="password"></div>
+  <button class="btn acc" style="width:100%;padding:11px" onclick="login()">Entrar</button>
+  <div id="lgM" class="muted" style="margin-top:12px;font-size:13px"></div>
+</div></div>
+
+<header>
+  <div class="brand">Arena Wellness<small>by Bodytech · Let's Pipa</small></div>
+  <div class="sp"></div>
+  <span id="hDemo" class="pill demo" style="display:none">MODO DEMO</span>
+  <span id="hUser" class="pill"></span>
+  <button class="hb" onclick="reload()">↻ Atualizar</button>
+</header>
+<nav id="nav"></nav>
+<main id="view"></main>
+<div id="modal"><div class="box" id="mbox"></div></div>
+<div id="busy"><div class="box" id="busyM">Salvando…</div></div>
+<div id="toast"></div>
+<input type="file" id="fImp" accept=".xlsx,.xls,.csv" style="display:none" onchange="readImport(this.files[0]);this.value=''">
+
+<script>
+/* =====================================================================
+   API_URL: mesma URL /exec usada no index.html (vazio = modo demonstração)
+   ===================================================================== */
+var API_URL = '';
+
+var DEMO = !API_URL;
+var TABS = [['geral', 'Visão geral'], ['aula', 'Aula / Lista'], ['insc', 'Inscritos'], ['grade', 'Grade'], ['comp', 'Compradores'], ['cfg', 'Configurações']];
+var S = { pin: '', user: '', d: null, tab: 'geral', aula: '', q: '', fSt: 'ativos', fDia: '', imp: null, compQ: '' };
+var WDL = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+
+function $(id) { return document.getElementById(id); }
+function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+function digits(v) { return String(v || '').replace(/\D/g, ''); }
+function num(v) { var n = parseFloat(String(v == null ? '' : v).replace(',', '.')); return isNaN(n) ? 0 : n; }
+function pd(d) { var m = String(d).match(/^(\d{4})-(\d{2})-(\d{2})/); return m ? { y: +m[1], m: +m[2], d: +m[3] } : null; }
+function ts(d, h) { var p = pd(d), t = String(h || '00:00').split(':'); return p ? Date.UTC(p.y, p.m - 1, p.d, +t[0] + 3, +t[1] || 0) : 0; }
+function dBR(d) { var p = pd(d); return p ? (p.d < 10 ? '0' : '') + p.d + '/' + (p.m < 10 ? '0' : '') + p.m : d; }
+function dW(d) { var p = pd(d); return p ? WDL[new Date(Date.UTC(p.y, p.m - 1, p.d)).getUTCDay()] + ' ' + dBR(d) : d; }
+function dtBR(s) { var m = String(s || '').match(/^(\d{4})-(\d{2})-(\d{2})[ T](\d{2}):(\d{2})/); return m ? m[3] + '/' + m[2] + ' ' + m[4] + ':' + m[5] : String(s || ''); }
+function fmtDoc(c, t) { c = String(c || ''); if (/PASS/i.test(t || '')) return esc(c) + ' <span class="b mut">passaporte</span>'; if (/^\d{1,11}$/.test(c)) c = ('00000000000' + c).slice(-11); return /^\d{11}$/.test(c) ? c.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4') : c; }
+function fmtFone(v) { var d = digits(v); if (d.indexOf('55') === 0 && d.length >= 12) d = d.slice(2); return d.length === 11 ? '(' + d.slice(0, 2) + ') ' + d.slice(2, 7) + '-' + d.slice(7) : d.length === 10 ? '(' + d.slice(0, 2) + ') ' + d.slice(2, 6) + '-' + d.slice(6) : v; }
+function opts(list, sel, blank) { var h = blank != null ? '<option value="">' + esc(blank) + '</option>' : ''; list.forEach(function (o) { var v = typeof o === 'string' ? o : o[0], l = typeof o === 'string' ? o : o[1]; h += '<option value="' + esc(v) + '"' + (String(v) === String(sel) ? ' selected' : '') + '>' + esc(l) + '</option>'; }); return h; }
+function toast(m, err) { var t = $('toast'); t.textContent = m; t.className = err ? 'err' : ''; t.style.display = 'block'; clearTimeout(S.tt); S.tt = setTimeout(function () { t.style.display = 'none'; }, err ? 6000 : 3000); }
+function busy(m) { $('busyM').textContent = m || 'Salvando…'; $('busy').style.display = 'flex'; }
+function done() { $('busy').style.display = 'none'; }
+function fail(e) { done(); toast((e && e.message) || String(e), true); }
+function modal(h) { $('mbox').innerHTML = h; $('modal').style.display = 'flex'; }
+function closeModal() { $('modal').style.display = 'none'; }
+function now() { return Date.now() + (S.skew || 0); }
+
+/* ============================== API ============================== */
+function apiGet() {
+  if (DEMO) return Promise.resolve(demoData());
+  return fetch(API_URL + '?action=admin&pin=' + encodeURIComponent(S.pin) + '&t=' + Date.now()).then(function (r) { return r.json(); })
+    .then(function (j) { if (!j.ok) throw new Error(j.error); return j.data; });
+}
+function apiPost(action, p) {
+  p = p || {}; p.action = action; p.pin = S.pin; p.user = S.user;
+  if (DEMO) return new Promise(function (res, rej) { setTimeout(function () { try { res(demoPost(p)); } catch (e) { rej(e); } }, 200); });
+  return fetch(API_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(p) })
+    .then(function (r) { return r.json(); })
+    .then(function (j) { if (!j.ok) throw new Error(j.error); if (j.result && j.result.admin) setD(j.result.admin); return j.result && j.result.info; });
+}
+function setD(d) {
+  S.d = d; S.skew = d.agora ? d.agora - Date.now() : 0;
+  S.aById = {}; d.aulas.forEach(function (a) { S.aById[a.id] = a; });
+  S.cnt = {}; d.inscricoes.forEach(function (i) { var c = S.cnt[i.aula_id] = S.cnt[i.aula_id] || { conf: 0, esp: 0 }; if (i.status === 'CONFIRMADA') c.conf++; else if (i.status === 'ESPERA') c.esp++; });
+}
+function login() {
+  var u = $('lgU').value.trim(), p = $('lgP').value;
+  if (!u) { $('lgM').textContent = 'Informe seu nome.'; return; }
+  S.user = u; S.pin = p; $('lgM').textContent = 'Carregando…';
+  apiGet().then(function (d) {
+    setD(d); try { localStorage.setItem('arena_adm_user', u); sessionStorage.setItem('arena_adm_pin', p); } catch (e) {}
+    $('ov').style.display = 'none'; $('hUser').textContent = u; render();
+  }).catch(function (e) { $('lgM').textContent = e.message || 'Erro'; });
+}
+function reload(silent) { if (!silent) busy('Atualizando…'); return apiGet().then(function (d) { setD(d); done(); render(); }).catch(fail); }
+
+/* ============================== RENDER ============================== */
+function go(t, aula) { S.tab = t; if (aula) S.aula = aula; render(); window.scrollTo(0, 0); }
+function render() {
+  $('nav').innerHTML = TABS.map(function (t) { return '<button class="' + (S.tab === t[0] ? 'on' : '') + '" onclick="go(\'' + t[0] + '\')">' + t[1] + '</button>'; }).join('');
+  V[S.tab]();
+}
+function aulasAtivas() { return S.d.aulas.filter(function (a) { return String(a.ativo).toUpperCase() !== 'N'; }); }
+function diasList() { var o = []; aulasAtivas().forEach(function (a) { if (o.indexOf(a.data) < 0) o.push(a.data); }); return o.sort(); }
+function occ(a) { var c = S.cnt[a.id] || { conf: 0, esp: 0 }, cap = num(a.capacidade) || 50; return { conf: c.conf, esp: c.esp, cap: cap, pct: Math.min(100, c.conf / cap * 100) }; }
+function barCls(o) { return o.conf >= o.cap ? 'full' : o.pct >= 80 ? 'hi' : ''; }
+function aulaLbl(a) { return a ? dW(a.data) + ' · ' + a.inicio + ' · ' + a.modalidade : '(aula removida)'; }
+
+function vGeral() {
+  var I = S.d.inscricoes, conf = 0, esp = 0, canc = 0, pess = {}, capTot = 0;
+  I.forEach(function (i) { if (i.status === 'CONFIRMADA') { conf++; pess[i.cpf] = 1; } else if (i.status === 'ESPERA') { esp++; pess[i.cpf] = 1; } else canc++; });
+  aulasAtivas().forEach(function (a) { capTot += num(a.capacidade) || 50; });
+  var c = S.d.config || {};
+  var h = '<h2>Visão geral</h2><p class="sub">Clique numa aula para ver a lista de inscritos.</p>';
+  var avisos = [];
+  if (String(c.INSCRICOES_ABERTAS).toUpperCase() === 'N') avisos.push('Inscrições <b>fechadas</b> no portal.');
+  if (String(c.VALIDAR_CPF).toUpperCase() !== 'N' && !S.d.compradores.length) avisos.push('Nenhum comprador importado. Com a validação de CPF ligada, <b>ninguém consegue se inscrever</b>. Importe a lista em Compradores.');
+  if (!S.d.whats_ok) avisos.push('WhatsApp não configurado: as inscrições funcionam, mas nenhuma mensagem é enviada. Veja Configurações.');
+  if (avisos.length) h += '<div class="note warn" style="margin-bottom:16px">' + avisos.join('<br>') + '</div>';
+  h += '<div class="kpis"><div class="kpi"><div class="l">Confirmadas</div><div class="v">' + conf + '</div><div class="s">de ' + capTot + ' vagas (' + (capTot ? Math.round(conf / capTot * 100) : 0) + '%)</div></div>' +
+    '<div class="kpi"><div class="l">Lista de espera</div><div class="v">' + esp + '</div><div class="s">em todas as aulas</div></div>' +
+    '<div class="kpi"><div class="l">Pessoas únicas</div><div class="v">' + Object.keys(pess).length + '</div><div class="s">' + canc + ' cancelamentos</div></div>' +
+    '<div class="kpi"><div class="l">Compradores</div><div class="v">' + S.d.compradores.length + '</div><div class="s">documentos liberados</div></div></div>';
+  h += '<div class="card">';
+  diasList().forEach(function (d) {
+    var as = aulasAtivas().filter(function (a) { return a.data === d; }).sort(function (x, y) { return String(x.inicio).localeCompare(y.inicio); });
+    var dc = 0, dcap = 0; as.forEach(function (a) { var o = occ(a); dc += o.conf; dcap += o.cap; });
+    h += '<div class="dayrow"><div class="dl"><b>' + dW(d) + '</b><span>' + dc + '/' + dcap + ' vagas</span></div><div class="slots">';
+    as.forEach(function (a) {
+      var o = occ(a), past = ts(a.data, a.inicio) <= now();
+      h += '<button class="slot' + (past ? ' off' : '') + '" onclick="go(\'aula\',\'' + a.id + '\')"><div class="t">' + esc(a.inicio) + '–' + esc(a.fim) + (a.instrutor ? ' · ' + esc(a.instrutor) : '') + '</div><div class="n">' + esc(a.modalidade) + '</div>' +
+        '<div class="bar"><i class="' + barCls(o) + '" style="width:' + o.pct + '%"></i></div><div class="c"><span><b>' + o.conf + '</b>/' + o.cap + '</span><span>' + (o.esp ? o.esp + ' na espera' : past ? 'realizada' : '') + '</span></div></button>';
+    });
+    h += '</div></div>';
+  });
+  if (!diasList().length) h += '<p class="muted">Nenhuma aula cadastrada.</p>';
+  $('view').innerHTML = h + '</div>';
+}
+
+function vAula() {
+  var as = aulasAtivas().slice().sort(function (x, y) { return (x.data + x.inicio).localeCompare(y.data + y.inicio); });
+  if (!S.aula || !S.aById[S.aula]) S.aula = (as.filter(function (a) { return ts(a.data, a.inicio) > now(); })[0] || as[0] || {}).id;
+  var a = S.aById[S.aula];
+  var h = '<h2>Aula / Lista</h2><p class="sub">Lista de presença, lista de espera e ações por inscrito.</p><div class="card noprint"><div class="row"><div class="fld" style="flex:3"><label>Aula</label><select class="in" onchange="S.aula=this.value;render()">' +
+    opts(as.map(function (x) { var o = occ(x); return [x.id, aulaLbl(x) + '  (' + o.conf + '/' + o.cap + (o.esp ? ' +' + o.esp + ' espera' : '') + ')']; }), S.aula) + '</select></div>' +
+    '<button class="btn line" onclick="exportCSV(\'aula\')">⬇ Exportar CSV</button><button class="btn line" onclick="window.print()">🖨 Imprimir lista</button></div></div>';
+  if (!a) { $('view').innerHTML = h; return; }
+  var o = occ(a), I = S.d.inscricoes.filter(function (i) { return i.aula_id === a.id; });
+  var conf = I.filter(function (i) { return i.status === 'CONFIRMADA'; }).sort(function (x, y) { return String(x.nome).localeCompare(y.nome); });
+  var esp = I.filter(function (i) { return i.status === 'ESPERA'; }).sort(function (x, y) { return num(x.ts) - num(y.ts); });
+  var cx = I.filter(function (i) { return i.status === 'CANCELADA'; });
+  h += '<div class="card"><h3 style="font-size:18px;margin-bottom:4px">' + esc(a.modalidade) + '</h3><p class="muted" style="margin:0 0 14px">' + dW(a.data) + ' · ' + esc(a.inicio) + '–' + esc(a.fim) + (a.instrutor ? ' · ' + esc(a.instrutor) : '') + (a.local ? ' · ' + esc(a.local) : '') + '</p>' +
+    '<div class="kpis" style="margin-bottom:6px"><div class="kpi"><div class="l">Confirmados</div><div class="v">' + o.conf + '<span class="muted" style="font-size:15px">/' + o.cap + '</span></div></div><div class="kpi"><div class="l">Espera</div><div class="v">' + o.esp + '</div></div><div class="kpi"><div class="l">Vagas livres</div><div class="v">' + Math.max(0, o.cap - o.conf) + '</div></div><div class="kpi"><div class="l">Cancelados</div><div class="v">' + cx.length + '</div></div></div></div>';
+  h += '<div class="card"><h3>Confirmados (' + conf.length + ')</h3>' + inscTable(conf, true) + '</div>';
+  h += '<div class="card noprint"><h3>Lista de espera (' + esp.length + ')</h3>' + (esp.length ? inscTable(esp, false, true) : '<p class="muted">Ninguém na espera.</p>') + '</div>';
+  if (cx.length) h += '<div class="card noprint"><h3>Cancelados (' + cx.length + ')</h3>' + inscTable(cx) + '</div>';
+  $('view').innerHTML = h;
+}
+function inscTable(list, presenca, pos) {
+  if (!list.length) return '<p class="muted">Nenhum inscrito ainda.</p>';
+  var h = '<div class="tw"><table class="t"><thead><tr>' + (pos ? '<th>#</th>' : '') + (presenca ? '<th class="n">✓</th>' : '') + '<th>Nome</th><th>Documento</th><th>WhatsApp</th><th>Inscrito em</th><th>Código</th><th class="noprint">Msg</th><th class="noprint"></th></tr></thead><tbody>';
+  list.forEach(function (i, k) {
+    var cx = i.status === 'CANCELADA';
+    h += '<tr class="' + (cx ? 'cx' : '') + '">' + (pos ? '<td>' + (k + 1) + 'º</td>' : '') + (presenca ? '<td class="n">☐</td>' : '') +
+      '<td><b>' + esc(i.nome) + '</b>' + (i.promovido_em ? '<small>veio da espera em ' + dtBR(i.promovido_em) + '</small>' : '') + (cx ? '<small>cancelado ' + dtBR(i.cancelado_em) + ' (' + esc(i.cancelado_por) + ')</small>' : '') + '</td>' +
+      '<td>' + fmtDoc(i.cpf, i.tipo_doc) + '</td><td><a href="https://wa.me/' + digits(i.whatsapp) + '" target="_blank" rel="noopener">' + esc(fmtFone(i.whatsapp)) + '</a></td><td>' + dtBR(i.criado_em) + '</td><td><code>' + esc(i.codigo) + '</code></td>' +
+      '<td class="noprint"><small>' + esc(i.wa_status || '—') + '</small></td><td class="noprint right" style="white-space:nowrap">' +
+      (cx ? '' : '<button class="btn line sm" onclick="reenviar(\'' + i.id + '\')" title="Reenviar WhatsApp">↻ Msg</button> <button class="btn red sm" onclick="cancelAdm(\'' + i.id + '\')">Cancelar</button>') + '</td></tr>';
+  });
+  return h + '</tbody></table></div>';
+}
+function cancelAdm(id) {
+  var i = S.d.inscricoes.filter(function (x) { return x.id === id; })[0];
+  modal('<h3 style="font-size:18px">Cancelar inscrição?</h3><p><b>' + esc(i.nome) + '</b><br><span class="muted">' + esc(aulaLbl(S.aById[i.aula_id])) + '</span></p>' +
+    (i.status === 'CONFIRMADA' ? '<p class="note">A vaga vai para o 1º da lista de espera, se houver (ele recebe WhatsApp).</p>' : '') +
+    '<label class="flex mt" style="cursor:pointer"><input type="checkbox" id="avisar" checked> Avisar a pessoa no WhatsApp</label>' +
+    '<div class="flex mt" style="justify-content:flex-end"><button class="btn line" onclick="closeModal()">Voltar</button><button class="btn red" onclick="doCancelAdm(\'' + id + '\')">Cancelar inscrição</button></div>');
+}
+function doCancelAdm(id) { var av = $('avisar').checked; closeModal(); busy(); apiPost('cancelarAdmin', { id: id, avisar: av }).then(function () { done(); render(); toast('Inscrição cancelada'); }).catch(fail); }
+function reenviar(id) { busy('Enviando…'); apiPost('reenviar', { id: id }).then(function () { done(); render(); toast('Mensagem reenviada (veja a coluna Msg)'); }).catch(fail); }
+
+function vInsc() {
+  var h = '<h2>Inscritos</h2><p class="sub">Todas as inscrições. Busque por nome, CPF, WhatsApp ou código.</p><div class="card"><div class="row">' +
+    '<div class="fld" style="flex:2"><label>Buscar</label><input class="in" id="iq" value="' + esc(S.q) + '" oninput="S.q=this.value;$(\'ilist\').innerHTML=inscAll()"></div>' +
+    '<div class="fld"><label>Dia</label><select class="in" onchange="S.fDia=this.value;$(\'ilist\').innerHTML=inscAll()">' + opts(diasList().map(function (d) { return [d, dW(d)]; }), S.fDia, 'Todos') + '</select></div>' +
+    '<div class="fld"><label>Status</label><select class="in" onchange="S.fSt=this.value;$(\'ilist\').innerHTML=inscAll()">' + opts([['ativos', 'Confirmados + espera'], ['CONFIRMADA', 'Confirmados'], ['ESPERA', 'Espera'], ['CANCELADA', 'Cancelados'], ['todos', 'Todos']], S.fSt) + '</select></div>' +
+    '<button class="btn line" onclick="exportCSV(\'filtro\')">⬇ Exportar CSV</button></div></div><div class="card" id="ilist">' + inscAll() + '</div>';
+  $('view').innerHTML = h;
+}
+function inscFiltered() {
+  var q = S.q.toLowerCase().trim(), qd = digits(q);
+  return S.d.inscricoes.filter(function (i) {
+    if (S.fSt === 'ativos' && i.status === 'CANCELADA') return false;
+    if (S.fSt !== 'ativos' && S.fSt !== 'todos' && i.status !== S.fSt) return false;
+    var a = S.aById[i.aula_id]; if (S.fDia && (a ? a.data : i.data) !== S.fDia) return false;
+    if (q && String(i.nome).toLowerCase().indexOf(q) < 0 && String(i.codigo).toLowerCase() !== q && !(qd.length >= 4 && (String(i.cpf).indexOf(qd) >= 0 || digits(i.whatsapp).indexOf(qd) >= 0))) return false;
+    return true;
+  }).sort(function (x, y) { return num(y.ts) - num(x.ts); });
+}
+function inscAll() {
+  var L = inscFiltered();
+  var h = '<div class="muted" style="margin-bottom:8px">' + L.length + ' inscrição(ões)</div><div class="tw"><table class="t"><thead><tr><th>Nome</th><th>Aula</th><th>Status</th><th>Documento</th><th>WhatsApp</th><th>Inscrito em</th><th>Código</th><th></th></tr></thead><tbody>';
+  L.slice(0, 600).forEach(function (i) {
+    var a = S.aById[i.aula_id], st = i.status;
+    h += '<tr class="' + (st === 'CANCELADA' ? 'cx' : '') + '"><td><b>' + esc(i.nome) + '</b></td><td><a href="#" onclick="go(\'aula\',\'' + i.aula_id + '\');return false">' + esc(aulaLbl(a)) + '</a></td>' +
+      '<td><span class="b ' + (st === 'CONFIRMADA' ? 'ok' : st === 'ESPERA' ? 'warn' : 'mut') + '">' + (st === 'CONFIRMADA' ? 'Confirmada' : st === 'ESPERA' ? 'Espera' : 'Cancelada') + '</span></td>' +
+      '<td>' + fmtDoc(i.cpf, i.tipo_doc) + '</td><td><a href="https://wa.me/' + digits(i.whatsapp) + '" target="_blank" rel="noopener">' + esc(fmtFone(i.whatsapp)) + '</a></td><td>' + dtBR(i.criado_em) + '</td><td><code>' + esc(i.codigo) + '</code></td>' +
+      '<td class="right">' + (st === 'CANCELADA' ? '' : '<button class="btn red sm" onclick="cancelAdm(\'' + i.id + '\')">Cancelar</button>') + '</td></tr>';
+  });
+  if (!L.length) h += '<tr><td colspan="8" class="muted">Nenhuma inscrição.</td></tr>';
+  return h + '</tbody></table></div>';
+}
+function exportCSV(kind) {
+  var L = kind === 'aula' ? S.d.inscricoes.filter(function (i) { return i.aula_id === S.aula; }).sort(function (x, y) { return (x.status + x.nome).localeCompare(y.status + y.nome); }) : inscFiltered();
+  var cols = [['Dia', function (i) { var a = S.aById[i.aula_id]; return dBR(a ? a.data : i.data); }], ['Horário', function (i) { var a = S.aById[i.aula_id]; return a ? a.inicio : i.inicio; }], ['Aula', function (i) { var a = S.aById[i.aula_id]; return a ? a.modalidade : i.modalidade; }],
+    ['Status', function (i) { return i.status; }], ['Nome', function (i) { return i.nome; }], ['Documento', function (i) { return /PASS/i.test(i.tipo_doc || '') ? 'Passaporte ' + i.cpf : fmtDoc(i.cpf); }], ['WhatsApp', function (i) { return fmtFone(i.whatsapp); }], ['Inscrito em', function (i) { return dtBR(i.criado_em); }], ['Código', function (i) { return i.codigo; }], ['Termo', function (i) { return i.termo_versao + ' ' + dtBR(i.termo_aceito_em); }]];
+  var cell = function (v) { v = String(v == null ? '' : v); return /[;"\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; };
+  var out = [cols.map(function (c) { return c[0]; }).join(';')];
+  L.forEach(function (i) { out.push(cols.map(function (c) { return cell(c[1](i)); }).join(';')); });
+  var a = S.aById[S.aula], name = kind === 'aula' && a ? 'arena_' + a.data + '_' + String(a.inicio).replace(':', 'h') + '_' + String(a.modalidade).replace(/\W+/g, '-') : 'arena_inscritos';
+  var el = document.createElement('a'); el.href = URL.createObjectURL(new Blob(['﻿' + out.join('\n')], { type: 'text/csv;charset=utf-8' })); el.download = name + '.csv';
+  document.body.appendChild(el); el.click(); setTimeout(function () { el.remove(); }, 500);
+}
+
+/* ---------------------------- GRADE ---------------------------- */
+function vGrade() {
+  var all = S.d.aulas.slice().sort(function (x, y) { return (String(x.data) + x.inicio).localeCompare(String(y.data) + y.inicio); });
+  var h = '<h2>Grade de aulas</h2><p class="sub">Edite modalidade, horários, instrutor e vagas. Ao salvar, dá para aplicar a mesma mudança no mesmo horário de todos os dias.</p>' +
+    '<div class="card"><div class="flex" style="justify-content:space-between;margin-bottom:12px"><span class="muted">' + all.length + ' aulas</span><button class="btn acc" onclick="editAula()">+ Nova aula</button></div><div class="tw"><table class="t"><thead><tr><th>Dia</th><th>Horário</th><th>Modalidade</th><th>Instrutor</th><th>Local</th><th class="n">Vagas</th><th class="n">Inscritos</th><th>Ativa</th><th></th></tr></thead><tbody>';
+  all.forEach(function (a) {
+    var o = occ(a), off = String(a.ativo).toUpperCase() === 'N';
+    h += '<tr class="' + (off ? 'cx' : '') + '"><td>' + dW(a.data) + '</td><td>' + esc(a.inicio) + '–' + esc(a.fim) + '</td><td><b>' + esc(a.modalidade) + '</b></td><td>' + esc(a.instrutor) + '</td><td>' + esc(a.local) + '</td><td class="n">' + o.cap + '</td><td class="n">' + o.conf + (o.esp ? ' +' + o.esp : '') + '</td><td>' + (off ? 'Não' : 'Sim') + '</td><td><button class="btn line sm" onclick="editAula(\'' + a.id + '\')">Editar</button></td></tr>';
+  });
+  $('view').innerHTML = h + '</tbody></table></div></div>';
+}
+function editAula(id) {
+  var a = id ? S.aById[id] : { data: diasList()[0] || '2026-12-27', inicio: '08:00', fim: '09:00', modalidade: '', instrutor: '', capacidade: 50, local: '', descricao: '', ativo: 'S' };
+  var mesmos = id ? S.d.aulas.filter(function (x) { return x.id !== id && x.inicio === a.inicio; }).length : 0;
+  modal('<h3 style="font-size:18px">' + (id ? 'Editar aula' : 'Nova aula') + '</h3>' +
+    '<div class="row"><div class="fld"><label>Dia</label><input type="date" class="in" id="eData" value="' + esc(a.data) + '"></div><div class="fld"><label>Início</label><input type="time" class="in" id="eIni" value="' + esc(a.inicio) + '"></div><div class="fld"><label>Fim</label><input type="time" class="in" id="eFim" value="' + esc(a.fim) + '"></div></div>' +
+    '<div class="row mt"><div class="fld" style="flex:2"><label>Modalidade</label><input class="in" id="eMod" value="' + esc(a.modalidade) + '" placeholder="Ex.: Yoga, Funcional, HIIT"></div><div class="fld"><label>Instrutor</label><input class="in" id="eIns" value="' + esc(a.instrutor) + '"></div></div>' +
+    '<div class="row mt"><div class="fld"><label>Vagas</label><input type="number" min="1" class="in" id="eCap" value="' + esc(a.capacidade) + '"></div><div class="fld" style="flex:2"><label>Local</label><input class="in" id="eLoc" value="' + esc(a.local) + '" placeholder="Opcional"></div><div class="fld"><label>Ativa</label><select class="in" id="eAt">' + opts([['S', 'Sim'], ['N', 'Não (some do portal)']], String(a.ativo || 'S').toUpperCase()) + '</select></div></div>' +
+    '<div class="fld mt"><label>Descrição (aparece no portal)</label><input class="in" id="eDesc" value="' + esc(a.descricao) + '" placeholder="Opcional: ex. traga sua toalha"></div>' +
+    (mesmos ? '<label class="flex mt" style="cursor:pointer"><input type="checkbox" id="eAll"> Aplicar modalidade, instrutor, vagas, local, descrição e horário de fim nas outras <b>' + mesmos + '</b> aulas das ' + esc(a.inicio) + '</label>' : '') +
+    (id && occ(a).conf ? '<p class="note mt">Se aumentar as vagas, a lista de espera é confirmada automaticamente.</p>' : '') +
+    '<div class="flex mt" style="justify-content:flex-end"><button class="btn line" onclick="closeModal()">Cancelar</button><button class="btn acc" onclick="saveAula(\'' + (id || '') + '\')">Salvar</button></div>');
+}
+function saveAula(id) {
+  var a = { id: id || '', data: $('eData').value, inicio: $('eIni').value, fim: $('eFim').value, modalidade: $('eMod').value.trim(), instrutor: $('eIns').value.trim(), capacidade: num($('eCap').value) || 50, local: $('eLoc').value.trim(), descricao: $('eDesc').value.trim(), ativo: $('eAt').value };
+  if (!a.modalidade) { toast('Informe a modalidade', true); return; }
+  var list = [a];
+  if (id && $('eAll') && $('eAll').checked) {
+    var orig = S.aById[id];
+    S.d.aulas.forEach(function (x) { if (x.id !== id && x.inicio === orig.inicio) list.push({ id: x.id, data: x.data, inicio: a.inicio, fim: a.fim, modalidade: a.modalidade, instrutor: a.instrutor, capacidade: a.capacidade, local: a.local, descricao: a.descricao, ativo: x.ativo }); });
+  }
+  closeModal(); busy();
+  apiPost('salvarAulas', { aulas: list }).then(function () { done(); render(); toast(list.length > 1 ? list.length + ' aulas atualizadas' : 'Aula salva'); }).catch(fail);
+}
+
+/* ---------------------------- COMPRADORES ---------------------------- */
+function vComp() {
+  var C = S.d.compradores, cpf = 0, pass = 0;
+  C.forEach(function (c) { if (c.tipo_doc === 'PASSAPORTE') pass++; else cpf++; });
+  var h = '<h2>Compradores</h2><p class="sub">Só quem está nesta lista consegue se inscrever (quando "Validar CPF" está ligado).</p>';
+  h += '<div class="kpis"><div class="kpi"><div class="l">Documentos liberados</div><div class="v">' + C.length + '</div><div class="s">' + cpf + ' CPF · ' + pass + ' passaporte</div></div></div>';
+  if (!S.imp) {
+    h += '<div class="card"><h3>Importar lista do Baladapp</h3><div class="drop" onclick="$(\'fImp\').click()"><b>Clique para escolher o arquivo</b><br><span class="muted">Excel (.xlsx) ou CSV exportado do Baladapp. O sistema acha a coluna de CPF sozinho.</span></div></div>';
+  } else h += impHTML();
+  h += '<div class="card"><h3>Consultar documento</h3><div class="row"><div class="fld"><input class="in" placeholder="CPF, passaporte ou nome" value="' + esc(S.compQ) + '" oninput="S.compQ=this.value;$(\'clist\').innerHTML=compList()"></div></div><div class="tw mt" id="clist">' + compList() + '</div></div>';
+  $('view').innerHTML = h;
+}
+function compList() {
+  var q = S.compQ.toLowerCase().trim(); if (q.length < 3) return '<p class="muted">Digite pelo menos 3 caracteres.</p>';
+  var qd = digits(q), qk = q.toUpperCase().replace(/[^A-Z0-9]/g, '');
+  var L = S.d.compradores.filter(function (c) { return String(c.nome).toLowerCase().indexOf(q) >= 0 || (qd.length >= 3 && String(c.cpf).indexOf(qd) >= 0) || (qk.length >= 3 && String(c.cpf).indexOf(qk) >= 0); }).slice(0, 50);
+  if (!L.length) return '<p class="muted">Não encontrado — essa pessoa não consegue se inscrever.</p>';
+  return '<table class="t"><thead><tr><th>Nome</th><th>Documento</th><th>Ingresso</th></tr></thead><tbody>' + L.map(function (c) { return '<tr><td>' + esc(c.nome) + '</td><td>' + fmtDoc(c.cpf, c.tipo_doc) + '</td><td><small>' + esc(c.ingresso) + '</small></td></tr>'; }).join('') + '</tbody></table>';
+}
+function loadXLSX() {
+  if (window.XLSX) return Promise.resolve();
+  return new Promise(function (res, rej) { var s = document.createElement('script'); s.src = 'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js'; s.onload = res; s.onerror = function () { rej(new Error('Não consegui carregar o leitor de Excel. Verifique a internet.')); }; document.head.appendChild(s); });
+}
+function nh(h) { return String(h || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, ''); }
+function pickCol(head, prefs) { for (var p = 0; p < prefs.length; p++) { for (var i = 0; i < head.length; i++) if (head[i] === prefs[p]) return i; } for (p = 0; p < prefs.length; p++) { for (i = 0; i < head.length; i++) if (head[i].indexOf(prefs[p]) >= 0) return i; } return -1; }
+function readImport(file) {
+  if (!file) return;
+  busy('Lendo arquivo…');
+  loadXLSX().then(function () {
+    return new Promise(function (res, rej) { var r = new FileReader(); r.onload = function () { res(r.result); }; r.onerror = rej; r.readAsArrayBuffer(file); });
+  }).then(function (buf) {
+    var wb = XLSX.read(buf, { type: 'array', raw: true });
+    var ws = wb.Sheets[wb.SheetNames[0]];
+    var rows = XLSX.utils.sheet_to_json(ws, { header: 1, raw: true, defval: '' });
+    var hi = 0; for (var k = 0; k < Math.min(10, rows.length); k++) { if (rows[k].some(function (c) { return /cpf|documento/i.test(String(c)); })) { hi = k; break; } }
+    var head = rows[hi].map(nh), data = rows.slice(hi + 1).filter(function (r) { return r.join('') !== ''; });
+    var ci = pickCol(head, ['utilizador_documento', 'cpf', 'documento']);
+    if (ci < 0) throw new Error('Não achei a coluna de CPF/documento no arquivo.');
+    var ti = pickCol(head, ['utilizador_documento_tipo', 'documento_tipo', 'tipo_documento']);
+    var ni = pickCol(head, ['utilizador_nome', 'nome', 'cliente_nome']);
+    var ei = pickCol(head, ['utilizador_email', 'email', 'cliente_email']);
+    var di = pickCol(head, ['descricao', 'ingresso', 'produto', 'tipo_ingresso']);
+    var si = pickCol(head, ['sessao', 'setor']);
+    var recs = data.map(function (r) {
+      var doc = String(r[ci] == null ? '' : r[ci]).trim(), tipo = ti >= 0 ? String(r[ti]) : '';
+      var ing = [di >= 0 ? String(r[di]).replace(/\s+/g, ' ').replace(/[.;\s]+$/, '').trim() : '', si >= 0 ? String(r[si]).trim() : ''].filter(Boolean).join(' · ');
+      return { cpf: doc, tipo_doc: tipo, nome: ni >= 0 ? String(r[ni]).trim() : '', email: ei >= 0 ? String(r[ei]).trim() : '', ingresso: ing };
+    });
+    var tipos = {}; recs.forEach(function (r) { tipos[r.ingresso || '(sem descrição)'] = (tipos[r.ingresso || '(sem descrição)'] || 0) + 1; });
+    S.imp = { file: file.name, recs: recs, col: rows[hi][ci], tipos: tipos, sel: {}, modo: 'substituir' };
+    Object.keys(tipos).forEach(function (t) { S.imp.sel[t] = /arena|wellness|bodytech/i.test(t) || Object.keys(tipos).length === 1; });
+    if (!Object.keys(S.imp.sel).some(function (t) { return S.imp.sel[t]; })) Object.keys(tipos).forEach(function (t) { S.imp.sel[t] = true; });
+    done(); render();
+  }).catch(fail);
+}
+function impStats() {
+  var I = S.imp, ok = 0, pass = 0, sem = 0, inv = 0;
+  I.recs.forEach(function (r) {
+    if (!I.sel[r.ingresso || '(sem descrição)']) return;
+    var k = String(r.cpf).toUpperCase().replace(/[^A-Z0-9]/g, '');
+    if (!k) { sem++; return; }
+    if (/[A-Z]/.test(k) || /pass/i.test(r.tipo_doc)) { pass++; return; }
+    k = ('00000000000' + k).slice(-11);
+    if (cpfOk(k)) ok++; else inv++;
+  });
+  return { ok: ok, pass: pass, sem: sem, inv: inv };
+}
+function cpfOk(c) { if (!/^\d{11}$/.test(c) || /^(\d)\1{10}$/.test(c)) return false; for (var t = 9; t < 11; t++) { var s = 0; for (var i = 0; i < t; i++) s += +c[i] * (t + 1 - i); if (((s * 10) % 11) % 10 !== +c[t]) return false; } return true; }
+function impHTML() {
+  var I = S.imp, st = impStats();
+  var h = '<div class="card"><div class="flex" style="justify-content:space-between"><h3 style="margin:0">Importar: ' + esc(I.file) + '</h3><button class="btn line sm" onclick="S.imp=null;render()">Descartar</button></div>' +
+    '<p class="muted" style="margin:6px 0 14px">Coluna de documento: <b>' + esc(I.col) + '</b> · ' + I.recs.length + ' linhas</p>' +
+    '<h3>Quais ingressos dão acesso à Arena?</h3><div class="grid" style="margin-bottom:14px">';
+  Object.keys(I.tipos).sort(function (a, b) { return I.tipos[b] - I.tipos[a]; }).forEach(function (t) {
+    h += '<label class="flex" style="cursor:pointer"><input type="checkbox" ' + (I.sel[t] ? 'checked' : '') + ' onchange="S.imp.sel[this.dataset.t]=this.checked;render()" data-t="' + esc(t) + '"> <span>' + esc(t) + ' <span class="muted">(' + I.tipos[t] + ')</span></span></label>';
+  });
+  h += '</div><div class="kpis"><div class="kpi"><div class="l">CPFs válidos</div><div class="v">' + st.ok + '</div></div><div class="kpi"><div class="l">Passaportes</div><div class="v">' + st.pass + '</div></div><div class="kpi"><div class="l">Sem documento</div><div class="v">' + st.sem + '</div><div class="s">ingresso não nominado</div></div><div class="kpi"><div class="l">CPF inválido</div><div class="v">' + st.inv + '</div></div></div>' +
+    (st.sem ? '<p class="note warn">' + st.sem + ' ingresso(s) sem documento: a pessoa precisa nominar o ingresso no Baladapp e vocês reimportam a lista.</p>' : '') +
+    '<div class="row mt"><div class="fld"><label>Modo</label><select class="in" onchange="S.imp.modo=this.value">' + opts([['substituir', 'Substituir a lista atual (recomendado)'], ['adicionar', 'Adicionar à lista atual']], I.modo) + '</select></div>' +
+    '<button class="btn acc" onclick="doImport()"' + (st.ok + st.pass ? '' : ' disabled') + '>Importar ' + (st.ok + st.pass) + ' documento(s)</button></div></div>';
+  return h;
+}
+function doImport() {
+  var I = S.imp, rows = I.recs.filter(function (r) { return I.sel[r.ingresso || '(sem descrição)'] && String(r.cpf).trim(); });
+  busy('Importando…');
+  apiPost('importarCompradores', { rows: rows, modo: I.modo }).then(function (r) { done(); S.imp = null; render(); toast((r && r.adicionados != null ? r.adicionados + ' importados · ' : '') + 'Lista atualizada'); }).catch(fail);
+}
+
+/* ---------------------------- CONFIG ---------------------------- */
+var TPLS = [
+  ['WA_TPL_CONFIRMADA', 'Vaga confirmada', 'Olá, {{1}}! Sua vaga na aula de {{2}} da Arena Wellness by Bodytech está confirmada para {{3}} às {{4}}. Código: {{5}}.\nSe não puder ir, cancele até 30 minutos antes para liberar a vaga. Até lá! 🌴', 'nome, aula, data, horário, código'],
+  ['WA_TPL_ESPERA', 'Lista de espera', 'Olá, {{1}}! A aula de {{2}} da Arena Wellness ({{3}} às {{4}}) está lotada e você entrou na lista de espera na posição {{5}}. Se uma vaga abrir, sua inscrição é confirmada automaticamente e avisamos por aqui.', 'nome, aula, data, horário, posição'],
+  ['WA_TPL_PROMOVIDA', 'Vaga liberada (saiu da espera)', 'Boa notícia, {{1}}! Abriu uma vaga e sua inscrição na aula de {{2}} da Arena Wellness está confirmada para {{3}} às {{4}}. Código: {{5}}. Te esperamos!', 'nome, aula, data, horário, código'],
+  ['WA_TPL_CANCELADA', 'Cancelamento', 'Olá, {{1}}. Sua inscrição na aula de {{2}} da Arena Wellness ({{3}} às {{4}}) foi cancelada. Quer reservar outro horário? É só acessar o portal da Arena.', 'nome, aula, data, horário']
+];
+function vCfg() {
+  var c = S.d.config || {};
+  function tog(k, lbl, desc) { var on = String(c[k]).toUpperCase() !== 'N'; return '<div class="flex" style="justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line)"><div><b>' + lbl + '</b><div class="muted" style="font-size:12px">' + desc + '</div></div><button class="btn ' + (on ? '' : 'line') + ' sm" onclick="saveCfg(\'' + k + '\',\'' + (on ? 'N' : 'S') + '\')">' + (on ? 'Ligado' : 'Desligado') + '</button></div>'; }
+  var h = '<h2>Configurações</h2><p class="sub">Tudo aqui também pode ser editado na aba CONFIG da planilha.</p>';
+  h += '<div class="card"><h3>Portal</h3>' + tog('INSCRICOES_ABERTAS', 'Inscrições abertas', 'Desligado: o portal mostra as aulas, mas não aceita reservas.') +
+    tog('VALIDAR_CPF', 'Validar CPF na lista de compradores', 'Só quem comprou o ingresso da Arena consegue se inscrever.') +
+    tog('CONFLITO_HORARIO', 'Bloquear aulas no mesmo horário', 'Impede a mesma pessoa em duas aulas que se sobrepõem.') +
+    '<div class="row mt"><div class="fld"><label>Cancelamento até (minutos antes)</label><input class="in" id="cMin" type="number" value="' + esc(c.CANCEL_MIN) + '"></div><div class="fld"><label>WhatsApp de suporte (aparece no rodapé)</label><input class="in" id="cSup" value="' + esc(c.SUPORTE_WHATS) + '" placeholder="5584999999999"></div>' +
+    '<button class="btn" onclick="saveCfgMany([[\'CANCEL_MIN\',$(\'cMin\').value],[\'SUPORTE_WHATS\',digits($(\'cSup\').value)]])">Salvar</button></div>' +
+    '<div class="row mt"><div class="fld"><label>Título</label><input class="in" id="cTit" value="' + esc(c.TITULO) + '"></div><div class="fld" style="flex:2"><label>Subtítulo</label><input class="in" id="cSub" value="' + esc(c.SUBTITULO) + '"></div><div class="fld"><label>Local</label><input class="in" id="cLoc" value="' + esc(c.LOCAL) + '"></div>' +
+    '<button class="btn" onclick="saveCfgMany([[\'TITULO\',$(\'cTit\').value],[\'SUBTITULO\',$(\'cSub\').value],[\'LOCAL\',$(\'cLoc\').value]])">Salvar</button></div></div>';
+  h += '<div class="card"><h3>Termo de responsabilidade</h3><p class="muted" style="margin-top:-6px">Texto sugerido — valide com a Bodytech/jurídico. Ao mudar o texto, troque a versão: quem aceitou a versão antiga precisará aceitar de novo na próxima reserva.</p>' +
+    '<textarea class="in" id="cTermo">' + esc(c.TERMO) + '</textarea><div class="row mt"><div class="fld" style="max-width:160px"><label>Versão</label><input class="in" id="cTv" value="' + esc(c.TERMO_VERSAO) + '"></div><button class="btn" onclick="saveCfgMany([[\'TERMO\',$(\'cTermo\').value],[\'TERMO_VERSAO\',$(\'cTv\').value]])">Salvar termo</button></div></div>';
+  h += '<div class="card"><h3>WhatsApp (API oficial da Meta)</h3>' + (S.d.whats_ok ? '<p class="note ok">Token e número configurados. As mensagens saem automaticamente.</p>' : '<p class="note warn">Ainda não configurado. Adicione <code>WA_TOKEN</code> e <code>WA_PHONE_ID</code> nas Propriedades do script do Apps Script.</p>') +
+    '<p class="muted">Crie estes 4 modelos (categoria <b>Utilidade</b>, idioma <b>Português (BR)</b>) no Gerenciador do WhatsApp da Meta, com os nomes abaixo. As mensagens só saem depois que a Meta aprovar cada modelo.</p>';
+  TPLS.forEach(function (t) { h += '<div class="tpl"><b>' + t[1] + '</b> · nome do modelo: <code>' + esc(c[t[0]] || '') + '</code> · variáveis: ' + t[3] + '<p>' + esc(t[2]) + '</p></div>'; });
+  var log = (S.d.log || []).slice().reverse().slice(0, 40);
+  h += '<h3 class="mt">Últimos envios</h3>' + (log.length ? '<div class="tw"><table class="t"><thead><tr><th>Quando</th><th>Para</th><th>Modelo</th><th>Status</th></tr></thead><tbody>' + log.map(function (l) { return '<tr><td>' + dtBR(l.quando) + '</td><td>' + esc(fmtFone(l.whatsapp)) + '</td><td>' + esc(l.template) + '</td><td><span class="b ' + (l.status === 'enviado' ? 'ok' : /erro/.test(l.status) ? 'crit' : 'mut') + '">' + esc(l.status) + '</span>' + (/erro/.test(l.status) && l.resposta ? '<small>' + esc(String(l.resposta).slice(0, 140)) + '</small>' : '') + '</td></tr>'; }).join('') + '</tbody></table></div>' : '<p class="muted">Nenhum envio ainda.</p>') + '</div>';
+  $('view').innerHTML = h;
+}
+function saveCfg(k, v) { saveCfgMany([[k, v]]); }
+function saveCfgMany(list) {
+  busy();
+  var p = Promise.resolve();
+  list.forEach(function (kv) { p = p.then(function () { return apiPost('salvarConfig', { chave: kv[0], valor: kv[1] }); }); });
+  p.then(function () { done(); render(); toast('Configuração salva'); }).catch(fail);
+}
+
+var V = { geral: vGeral, aula: vAula, insc: vInsc, grade: vGrade, comp: vComp, cfg: vCfg };
+
+/* ============================== DEMO ============================== */
+var DM = null;
+function demoData() {
+  if (!DM) {
+    var dias = ['2026-12-27', '2026-12-28', '2026-12-29', '2026-12-30', '2026-12-31', '2027-01-01', '2027-01-02'];
+    var sl = [['08:00', '09:00', 'Modalidade 1'], ['09:30', '10:30', 'Modalidade 2'], ['11:00', '12:00', 'Modalidade 3'], ['12:30', '13:30', 'Modalidade 4']];
+    var nomes = ['Ana Souza', 'Bruno Lima', 'Carla Mendes', 'Diego Rocha', 'Eduarda Alves', 'Felipe Costa', 'Gabriela Reis', 'Henrique Dias', 'Isabela Nunes', 'João Pedro Silva', 'Larissa Moraes', 'Marina Castro', 'Nicolas Prado', 'Olívia Teixeira', 'Pedro Henrique Melo'];
+    var A = [], I = [], seed = 3, k = 0;
+    function rnd() { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; }
+    dias.forEach(function (d, di) { sl.forEach(function (s, si) {
+      var a = { id: 'A' + di + si, data: d, inicio: s[0], fim: s[1], modalidade: s[2], instrutor: '', capacidade: 50, local: '', descricao: '', ativo: 'S' }; A.push(a);
+      var n = di === 0 && si === 1 ? 53 : Math.floor(rnd() * (di < 3 ? 45 : 15));
+      for (var j = 0; j < n; j++) { var nm = nomes[(j + di + si) % nomes.length]; I.push({ id: 'I' + (k++), codigo: 'X' + (100000 + k).toString(36).toUpperCase(), aula_id: a.id, data: d, inicio: s[0], modalidade: s[2], nome: nm, cpf: String(10000000000 + k * 7919).slice(0, 11), whatsapp: '55849' + String(90000000 + k * 37).slice(0, 8), status: j < 50 ? 'CONFIRMADA' : 'ESPERA', ts: 1766000000000 + k * 60000, termo_versao: 'v1', termo_aceito_em: '2026-12-20 10:00:00', criado_em: '2026-12-' + (10 + (k % 15)) + ' 1' + (k % 10) + ':2' + (k % 6) + ':00', promovido_em: '', cancelado_em: '', cancelado_por: '', wa_status: 'confirmada: não configurado' }); }
+    }); });
+    DM = { aulas: A, inscricoes: I, compradores: [], config: { TITULO: 'Arena Wellness by Bodytech', SUBTITULO: "Let's Pipa · 27/12 a 02/01 · das 8h às 14h", LOCAL: 'Arena Wellness · Praia da Pipa', INSCRICOES_ABERTAS: 'S', VALIDAR_CPF: 'S', CANCEL_MIN: '30', CONFLITO_HORARIO: 'S', SUPORTE_WHATS: '', TERMO: 'TERMO DE RESPONSABILIDADE (texto sugerido)…', TERMO_VERSAO: 'v1', WA_LANG: 'pt_BR', WA_TPL_CONFIRMADA: 'arena_confirmacao', WA_TPL_ESPERA: 'arena_lista_espera', WA_TPL_PROMOVIDA: 'arena_vaga_liberada', WA_TPL_CANCELADA: 'arena_cancelamento' }, whats_ok: false, log: [], agora: Date.UTC(2026, 11, 26, 15) };
+  }
+  return JSON.parse(JSON.stringify(DM));
+}
+function demoPost(p) {
+  var D = DM;
+  if (p.action === 'cancelarAdmin') {
+    var i = D.inscricoes.filter(function (x) { return x.id === p.id; })[0], era = i.status === 'CONFIRMADA';
+    i.status = 'CANCELADA'; i.cancelado_em = '2026-12-26 12:00:00'; i.cancelado_por = 'admin: ' + p.user;
+    if (era) { var e = D.inscricoes.filter(function (x) { return x.aula_id === i.aula_id && x.status === 'ESPERA'; }).sort(function (a, b) { return a.ts - b.ts; })[0]; if (e) { e.status = 'CONFIRMADA'; e.promovido_em = '2026-12-26 12:00:00'; } }
+  } else if (p.action === 'salvarAulas') {
+    p.aulas.forEach(function (a) { if (a.id) { var x = D.aulas.filter(function (y) { return y.id === a.id; })[0]; Object.keys(a).forEach(function (k) { x[k] = a[k]; }); } else { a.id = 'A' + Date.now(); D.aulas.push(a); } });
+  } else if (p.action === 'importarCompradores') {
+    var seen = {}; if (p.modo !== 'substituir') D.compradores.forEach(function (c) { seen[c.cpf] = 1; }); else D.compradores = [];
+    var n = 0;
+    p.rows.forEach(function (r) { var k = String(r.cpf).toUpperCase().replace(/[^A-Z0-9]/g, ''); var pass = /[A-Z]/.test(k) || /pass/i.test(r.tipo_doc); if (!pass) k = ('00000000000' + k).slice(-11); if (!k || seen[k] || (!pass && !cpfOk(k))) return; seen[k] = 1; n++; D.compradores.push({ cpf: k, tipo_doc: pass ? 'PASSAPORTE' : 'CPF', nome: r.nome, ingresso: r.ingresso }); });
+    setD(demoData()); return { adicionados: n };
+  } else if (p.action === 'salvarConfig') D.config[p.chave] = p.valor;
+  setD(demoData());
+  return {};
+}
+
+(function () {
+  if (DEMO) { $('hDemo').style.display = ''; $('lgP').parentNode.style.display = 'none'; $('lgM').textContent = 'Modo demonstração: dados de exemplo. Digite qualquer nome.'; }
+  try { $('lgU').value = localStorage.getItem('arena_adm_user') || ''; $('lgP').value = sessionStorage.getItem('arena_adm_pin') || ''; } catch (e) {}
+  ['lgU', 'lgP'].forEach(function (id) { $(id).addEventListener('keydown', function (e) { if (e.key === 'Enter') login(); }); });
+  $('modal').addEventListener('click', function (e) { if (e.target.id === 'modal') closeModal(); });
+  setInterval(function () { if (S.d && !document.hidden && $('modal').style.display !== 'flex' && !S.imp && (S.tab === 'geral' || S.tab === 'aula')) reload(true); }, 60000);
+})();
+</script>
+</body>
+</html>
